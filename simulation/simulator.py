@@ -1,5 +1,5 @@
 import numpy as np
-import torch
+import random
 from scipy.integrate import odeint
 import matplotlib.pyplot as  plt
 
@@ -89,9 +89,6 @@ class HyperNetSIR(nn.Module):
             #new_cases = self.beta*(output.data[i-1,:,0]*(adj @ output.data[i-1,:,1])).unsqueeze(0)
             #new_cases = self.beta*(output.data[i-1,:,0]*(adj.T @ (adj @ output.data[i-1,:,1]))).unsqueeze(0)
             #print((adj.T @ (adj @ output.data[i-1,:,1])).size())
-
-
-            # Now, use adj_hyper in place of adj in your original formula
             new_cases = self.beta * (output[i-1, :, 0] * (normalized_tensor @ output[i-1, :, 1])).unsqueeze(0)
 
             new_recovery = self.gamma*output.data[i-1,:,1]
@@ -212,6 +209,20 @@ def simulate_hypergraph(beta, gamma, H, time_step):
     S, I, R = S.sum(axis = 0), I.sum(axis = 0), R.sum(axis = 0)
 
     return S, I, R
+
+
+def set_seed(seed):
+    """
+    Set the seed for all sources of randomness in Python, NumPy, and PyTorch.
+
+    Args:
+    seed (int): The seed value to set.
+    """
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
 
 if __name__ == '__main__':
     beta = 0.0003 

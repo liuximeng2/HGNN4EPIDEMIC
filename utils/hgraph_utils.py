@@ -1,4 +1,23 @@
 import numpy as np
+import torch
+from torch.utils.data import Dataset, DataLoader
+
+class HypergraphDataset(Dataset):
+    def __init__(self, data):
+        self.sim_states = torch.tensor(data.sim_states, dtype=torch.float)
+        self.patient_zero = torch.tensor(data.patient_zero, dtype=torch.float)
+        self.static_hgraph = torch.tensor(data['static_hgraph'], dtype=torch.float)
+    
+    def __len__(self):
+        return self.sim_states.size(0)
+    
+    def __getitem__(self, idx):
+        sample = {
+            'sim_states': self.sim_states[idx],
+            'patient_zero': self.patient_zero[idx],
+            'static_hgraph': self.static_hgraph,
+        }
+        return sample
 
 def H2G(H, variable_weight=False):
     """
@@ -18,6 +37,7 @@ def H2G(H, variable_weight=False):
 
     invDE = np.mat(np.diag(np.power(DE, -1)))
     DV2 = np.mat(np.diag(np.power(DV, -0.5)))
+    DV2[np.isinf(DV2)] = 0
     W = np.mat(np.diag(W))
     H = np.mat(H)
     HT = H.T
