@@ -26,23 +26,23 @@ from torch_geometric.utils import softmax
 import numpy as np
 
 class HGNN(nn.Module):
-    def __init__(self, in_ch, n_hid, dropout=0.5):
+    def __init__(self, in_ch, n_hid, dropout=0.0):
         super(HGNN, self).__init__()
         self.dropout = dropout
         self.hgc1 = HGNN_conv(in_ch, n_hid)
-        #self.hgc2 = HGNN_conv(n_hid, n_hid)
+        self.hgc2 = HGNN_conv(n_hid, n_hid)
 
     def forward(self, x, G):
         x = F.relu(self.hgc1(x, G))
         x = F.dropout(x, self.dropout)
-        #x = self.hgc2(x, G)
+        x = F.relu(self.hgc2(x, G))
         return x
     
 class STConvBlock(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, spatial_out_channels):
         super(STConvBlock, self).__init__()
         self.temporal1 = GLU(in_channels, out_channels, kernel_size)
-        self.spatial = HGNN(out_channels, spatial_out_channels)
+        self.spatial = HGNN(out_channels, spatial_out_channels, dropout=0.0)
         self.temporal2 = GLU(spatial_out_channels, out_channels, kernel_size)
     
     def forward(self, x, G):
@@ -63,7 +63,7 @@ class SDSTGCN(nn.Module):
         for _ in range(num_blocks - 1):
             self.blocks.append(STConvBlock(out_channels, out_channels, kernel_size, spatial_out_channels))
         
-        self.final_temporal = nn.GRU(out_channels, out_channels, num_layers=2, batch_first = True)
+        self.final_temporal = nn.GRU(out_channels, out_channels, num_layers=1, batch_first = True)
         self.fc = nn.Linear(out_channels, 1)
     
     def forward(self, x, G):
@@ -72,4 +72,5 @@ class SDSTGCN(nn.Module):
         
         x, _ = self.final_temporal(x)
         x = self.fc(x)
-        return F.softmax(x, dim = 1)
+        #return F.softmax(x, dim = 1)
+        return torch.sigmoid(x)

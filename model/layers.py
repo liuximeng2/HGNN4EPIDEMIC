@@ -30,7 +30,7 @@ class GLU(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size):
         super(GLU, self).__init__()
         #self.conv = nn.Conv1d(in_channels, out_channels, kernel_size=kernel_size)
-        self.gru = nn.GRU(in_channels, out_channels, num_layers = 2, batch_first = True)
+        self.gru = nn.GRU(in_channels, out_channels, num_layers = 1, batch_first = True)
     
     def forward(self, x):
         #x = x.permute(0, 2, 1)

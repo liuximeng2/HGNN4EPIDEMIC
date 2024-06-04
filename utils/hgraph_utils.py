@@ -15,7 +15,7 @@ class HypergraphDataset(Dataset):
         sample = {
             'sim_states': self.sim_states[idx],
             'patient_zero': self.patient_zero[idx],
-            'static_hgraph': self.static_hgraph,
+            'static_hgraph': self.static_hgraph[idx],
         }
         return sample
 
@@ -37,6 +37,7 @@ def H2G(H, variable_weight=False):
 
     invDE = np.mat(np.diag(np.power(DE, -1)))
     DV2 = np.mat(np.diag(np.power(DV, -0.5)))
+    DV2.setflags(write=True)
     DV2[np.isinf(DV2)] = 0
     W = np.mat(np.diag(W))
     H = np.mat(H)
