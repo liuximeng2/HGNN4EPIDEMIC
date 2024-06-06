@@ -1,6 +1,8 @@
 import torch
 import os
 import numpy as np
+from torch_geometric.data import Data
+from torch_geometric.utils import erdos_renyi_graph
 from simulator import HyperNetSIR, set_seed, plot_sir_simulation
 
 def simulate(initial_case, num_sim, dynamic_hgraph, timestep, infection_rate, recovery_rate):
