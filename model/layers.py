@@ -26,16 +26,15 @@ from torch_geometric.typing import Adj, Size, OptTensor
 from typing import Optional
 
 #Temporal Layers
-class GLU(nn.Module):
-    def __init__(self, in_channels, out_channels, kernel_size):
-        super(GLU, self).__init__()
+class GRU(nn.Module):
+    def __init__(self, in_channels, out_channels):
+        super(GRU, self).__init__()
         #self.conv = nn.Conv1d(in_channels, out_channels, kernel_size=kernel_size)
         self.gru = nn.GRU(in_channels, out_channels, num_layers = 1, batch_first = True)
     
     def forward(self, x):
         #x = x.permute(0, 2, 1)
         x, _ = self.gru(x)
-        #x = self.glu(x)
         return x
 
 
@@ -64,35 +63,27 @@ class HGNN_conv(nn.Module):
         x = G.matmul(x)
         return x
 
+class MLP(nn.Module):
+    def __init__(self, in_channels, hidden_channels, out_channels, num_layers = 1, dropout = 0.0):
+        super(MLP, self).__init__()
 
-class HGNN_fc(nn.Module):
-    def __init__(self, in_ch, out_ch):
-        super(HGNN_fc, self).__init__()
-        self.fc = nn.Linear(in_ch, out_ch)
+        self.lins = torch.nn.ModuleList()
+        if num_layers == 1: 
+            self.lins.append(torch.nn.Linear(in_channels, out_channels))
+        else:
+            self.lins.append(torch.nn.Linear(in_channels, hidden_channels))
+            for _ in range(num_layers - 2):
+                self.lins.append(torch.nn.Linear(hidden_channels, hidden_channels))
+            self.lins.append(torch.nn.Linear(hidden_channels, out_channels))
 
-    def forward(self, x):
-        return self.fc(x)
-
-
-class HGNN_embedding(nn.Module):
-    def __init__(self, in_ch, n_hid, dropout=0.5):
-        super(HGNN_embedding, self).__init__()
         self.dropout = dropout
-        self.hgc1 = HGNN_conv(in_ch, n_hid)
-        self.hgc2 = HGNN_conv(n_hid, n_hid)
-
-    def forward(self, x, G):
-        x = F.relu(self.hgc1(x, G))
-        x = F.dropout(x, self.dropout)
-        x = F.relu(self.hgc2(x, G))
-        return x
-
-
-class HGNN_classifier(nn.Module):
-    def __init__(self, n_hid, n_class):
-        super(HGNN_classifier, self).__init__()
-        self.fc1 = nn.Linear(n_hid, n_class)
-
+    
     def forward(self, x):
-        x = self.fc1(x)
+
+        for lin in self.lins[:-1]:
+            x = lin(x)
+            x = F.relu(x)
+            x = F.dropout(x, p=self.dropout, training=self.training)
+        x = self.lins[-1](x)
+
         return x

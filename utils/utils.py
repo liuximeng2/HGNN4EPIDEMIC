@@ -17,7 +17,7 @@ def set_seed(seed):
     torch.cuda.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
 
-def split_dataset(data, train_ratio=0.5, valid_ratio=0.2):
+def split_dataset(data, train_ratio=0.5, valid_ratio=0.2, seed=0):
     """
     Splits the torch_geometric data object into train, validation, and test sets.
     
@@ -29,13 +29,12 @@ def split_dataset(data, train_ratio=0.5, valid_ratio=0.2):
     Returns:
     - dict: A dictionary containing the train, validation, and test sets.
     """
+    set_seed(seed)
     num_samples = data.static_hgraph.shape[0]
-    print(num_samples)
     indices = torch.randperm(num_samples)
     
     train_size = int(num_samples * train_ratio)
     valid_size = int(num_samples * valid_ratio)
-    test_size = num_samples - train_size - valid_size
     
     train_indices = indices[:train_size]
     valid_indices = indices[train_size:train_size + valid_size]

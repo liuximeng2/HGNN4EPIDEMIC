@@ -4,9 +4,9 @@ from torch.utils.data import Dataset, DataLoader
 
 class HypergraphDataset(Dataset):
     def __init__(self, data):
-        self.sim_states = torch.tensor(data.sim_states, dtype=torch.float)
-        self.patient_zero = torch.tensor(data.patient_zero, dtype=torch.float)
-        self.static_hgraph = torch.tensor(data['static_hgraph'], dtype=torch.float)
+        self.sim_states = data.sim_states.clone().detach()
+        self.patient_zero = data.patient_zero.clone().detach()
+        self.static_hgraph = data.static_hgraph.clone().detach()
     
     def __len__(self):
         return self.sim_states.size(0)

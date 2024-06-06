@@ -34,16 +34,16 @@ class HGNN(nn.Module):
 
     def forward(self, x, G):
         x = F.relu(self.hgc1(x, G))
-        x = F.dropout(x, self.dropout)
+        x = F.dropout(x, p=self.dropout, training=self.training)
         x = F.relu(self.hgc2(x, G))
         return x
     
 class STConvBlock(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, spatial_out_channels):
         super(STConvBlock, self).__init__()
-        self.temporal1 = GLU(in_channels, out_channels, kernel_size)
+        self.temporal1 = GRU(in_channels, out_channels)
         self.spatial = HGNN(out_channels, spatial_out_channels, dropout=0.0)
-        self.temporal2 = GLU(spatial_out_channels, out_channels, kernel_size)
+        self.temporal2 = GRU(spatial_out_channels, out_channels)
     
     def forward(self, x, G):
         x = self.temporal1(x)
@@ -73,4 +73,42 @@ class SDSTGCN(nn.Module):
         x, _ = self.final_temporal(x)
         x = self.fc(x)
         #return F.softmax(x, dim = 1)
+        return torch.sigmoid(x)
+
+class THGNN(nn.Module):
+    def __init__(self, in_channels, out_channels, hidden_size, mlp_layer, num_node, timesteps):
+        super(THGNN, self).__init__()
+        self.num_node = num_node
+        self.timesteps = timesteps
+        self.out_channels = out_channels
+        self.temporal1 = GRU(in_channels, out_channels)
+        self.spatial = HGNN(timesteps * out_channels, hidden_size, dropout=0.0)
+        self.fc = MLP(hidden_size, hidden_size, 1, num_layers=mlp_layer)
+        
+    def forward(self, x, G):
+        x = self.temporal1(x)
+        #print(f'Size after first temporal layer: {x.size()}')
+        x = x.reshape(-1, self.num_node, self.timesteps * self.out_channels)
+        #print(f'Size after first temporal layer: {x.size()}')
+        x = self.spatial(x, G)
+        #print(f'Size after first spatial layer: {x.size()}')
+        x = self.fc(x)
+        #print(f'Size after second temporal layer: {x.size()}')
+        return torch.sigmoid(x)
+    
+class TMLP(nn.Module):
+    def __init__(self, in_channels, out_channels, hidden_size, mlp_layer, num_node, timesteps):
+        super(TMLP, self).__init__()
+        self.num_node = num_node
+        self.timesteps = timesteps
+        self.out_channels = out_channels
+        self.temporal1 = GRU(in_channels, out_channels)
+        self.spatial = nn.Linear(timesteps * out_channels, hidden_size)
+        self.fc = MLP(hidden_size, hidden_size, 1, num_layers=mlp_layer)
+        
+    def forward(self, x, G):
+        x = self.temporal1(x)
+        x = x.reshape(-1, self.num_node, self.timesteps * self.out_channels)
+        x = F.relu(self.spatial(x))
+        x = self.fc(x)
         return torch.sigmoid(x)

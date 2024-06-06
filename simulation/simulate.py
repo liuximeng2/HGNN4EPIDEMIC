@@ -55,7 +55,7 @@ if __name__ == '__main__':
     #Filter out location nodes
     dynamic_hypergraph = data.dynamic_hypergraph[:,:,:2500]
 
-    num_sim = 100
+    num_sim = 1
     timestep = 120
     infection_rate = 0.12
     recovery_rate = 0.15
@@ -75,4 +75,4 @@ if __name__ == '__main__':
     delattr(data, 'y')
     delattr(data, 'processed_y')
     print(data)
-    torch.save(data, './data/sim#0/Sim_H2ABM.pt')
+    #torch.save(data, './data/sim#0/Sim_H2ABM.pt')
