@@ -38,6 +38,8 @@ def simulate(num_node, num_hedge, edge_prob, initial_case, num_sim, timestep, in
         result.append(preds)
         target[i][index] = 1
 
+    print(preds.squeeze()[5, 0:10, :])
+
     plot_sir_simulation(preds.squeeze())
     print('*** Simulation Completed ***')
     sim_states = torch.cat(result, dim = 0)
@@ -50,16 +52,16 @@ if __name__ == '__main__':
     set_seed(0)
     num_node = 2500
     num_hedge = 500
-    edge_prob = 0.01
+    edge_prob = 0.005
     num_sim = 100
     timestep = 120
-    infection_rate = 0.12
-    recovery_rate = 0.15
+    infection_rate = 0.03
+    recovery_rate = 0.03
     initial_case = 10
 
     sim_states, patient_zero, static_hgraph = simulate(num_node, num_hedge, edge_prob,initial_case, num_sim, timestep, infection_rate, recovery_rate)
 
-    data = Data(hgraph=static_hgraph)
+    data = Data(static_hgraph=static_hgraph)
 
     data.sim_states = sim_states
     data.patient_zero = patient_zero
