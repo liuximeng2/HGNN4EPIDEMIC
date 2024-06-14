@@ -1,70 +1,115 @@
 import logging
+import os
 import argparse
 from tqdm import tqdm
 
 import torch
 import torch.nn as nn
+from torch_sparse import coalesce
 from utils.hgraph_utils import *
 from utils.utils import *
-from model.models import TMLP, THGNN
 
-def train(model, train_loader, valid_loader, criterion, optimizer, num_epochs, logging, device):
+def train(model, train_loader, valid_loader, test_loader, optimizer, num_epochs, logging, device, args):
+
+    best_valid_mrr = float('-inf')
+    best_test_metrics = None
+    flag = True
+
     for epoch in tqdm(range(num_epochs + 1)):
         model.train()
         for sample in train_loader:
             sim_states, patient_zero = sample['sim_states'].to(device), sample['patient_zero'].to(device)
             sim_states = sim_states.contiguous().view(-1, sim_states.size(2),  sim_states.size(3)).to(device)
-            static_hgraph = sample['static_hgraph']
-            G = torch.zeros(size = (static_hgraph.shape[0], static_hgraph.shape[2], static_hgraph.shape[2])).to(device)
-            for g in range(G.shape[0]):
-                G[g] = torch.tensor(H2G(static_hgraph[g]), dtype = torch.float32)
+            static_hgraph = sample['static_hgraph'][0]
+            if args.struc == 'hgraph' and flag == True:
+                #G = torch.tensor(H2G(static_hgraph), dtype = torch.float32).to(device)
+                edge_index = H2EL(H2D(static_hgraph.T))
+                total = edge_index.max() + 1
+                edge_index, _ = coalesce(edge_index, None, total, total)
+                edge_index = ExtractV2E(edge_index)
+                edge_index[1] -= edge_index[1].min()
+                edge_index = edge_index.to(device)
+                flag = False
+            if args.struc == 'graph' and flag == True:
+                edge_index = Hyper2Graph(static_hgraph).to(device)
+                flag = False
             optimizer.zero_grad()
-            output = model(sim_states, G).squeeze()
+            output = model(sim_states, edge_index).squeeze()
             patient_zero = patient_zero.squeeze()
-            loss = criterion(output, patient_zero)
+
+            pos_loss = -torch.log(output[patient_zero > 0] + 1e-15).mean()
+            neg_loss = -torch.log(1 - output[patient_zero == 0] + 1e-15).mean()
+            loss = pos_loss * args.punishment + neg_loss
+
+            #loss = criterion(output, patient_zero) * 10
             loss.backward()
+            nn.utils.clip_grad_norm_(model.parameters(), 1)
             optimizer.step()
-        logging.info(f'Epoch {epoch}/{num_epochs}, Loss: {(loss.item()):.4f}')
+        logging.info(f'Epoch {epoch}/{num_epochs}, Loss: {(loss.item()):.3f}')
 
         if epoch % 5 == 0:
-            mrr, hits_at_1, hits_at_10, hits_at_100 = evaluate_model(model, train_loader, device)
-            logging.info(f'Train: MRR: {(mrr):.4f}, Hits@1: {(hits_at_1):.4f}, Hits@10: {(hits_at_10):.4f}, Hits@100: {(hits_at_100):.4f}')
-            mrr, hits_at_1, hits_at_10, hits_at_100 = evaluate_model(model, valid_loader, device)
-            logging.info(f'Valid: MRR: {(mrr):.4f}, Hits@1: {(hits_at_1):.4f}, Hits@10: {(hits_at_10):.4f}, Hits@100: {(hits_at_100):.4f}')
-        
+            mrr, hits_at_1, hits_at_10, hits_at_100 = evaluate_model(model, train_loader, device, args)
+            logging.info(f'Train: MRR: {(mrr):.3f}, Hits@1: {(hits_at_1):.2f}, Hits@10: {(hits_at_10):.3f}, Hits@100: {(hits_at_100):.3f}')
+            valid_mrr, valid_hits_at_1, valid_hits_at_10, valid_hits_at_100 = evaluate_model(model, valid_loader, device, args)
+            logging.info(f'Valid: MRR: {(valid_mrr):.3f}, Hits@1: {(valid_hits_at_1):.3f}, Hits@10: {(valid_hits_at_10):.3f}, Hits@100: {(valid_hits_at_100):.3f}')
+            test_mrr, test_hits_at_1, test_hits_at_10, test_hits_at_100 = evaluate_model(model, test_loader, device, args)
+            logging.info(f'Test: MRR: {(test_mrr):.3f}, Hits@1: {(test_hits_at_1):.3f}, Hits@10: {(test_hits_at_10):.3f}, Hits@100: {(test_hits_at_100):.3f}')
+            
+            if valid_mrr > best_valid_mrr:
+                best_valid_mrr = valid_mrr
+                best_test_metrics = {
+                    'MRR': test_mrr,
+                    'Hits@1': test_hits_at_1,
+                    'Hits@10': test_hits_at_10,
+                    'Hits@100': test_hits_at_100
+                }
 
-def evaluate_model(model, data_loader, device):
+    logging.info("Final Result:")
+    logging.info(f'MRR: {(best_test_metrics["MRR"]):.3f}, Hits@1: {(best_test_metrics["Hits@1"]):.3f}, Hits@10: {(best_test_metrics["Hits@10"]):.3f}, Hits@100: {(best_test_metrics["Hits@100"]):.3f}')
+
+def evaluate_model(model, data_loader, device, args):
     model.eval()
     mrr = 0
     hits_at_1 = 0
     hits_at_10 = 0
     hits_at_100 = 0
     total_samples = 0
+    flag = True
 
     with torch.no_grad():
         for sample in data_loader:
             sim_states, patient_zero = sample['sim_states'].to(device), sample['patient_zero'].to(device)
             sim_states = sim_states.reshape(-1, sim_states.size(2),  sim_states.size(3)).to(device)
-            static_hgraph = sample['static_hgraph']
-            G = torch.zeros(size = (static_hgraph.shape[0], static_hgraph.shape[2], static_hgraph.shape[2])).to(device)
-            for g in range(G.shape[0]):
-                G[g] = torch.tensor(H2G(static_hgraph[g]), dtype = torch.float32)
-            output = model(sim_states, G).squeeze(dim=-1)
+            static_hgraph = sample['static_hgraph'][0]
+            if args.struc == 'hgraph' and flag == True:
+                #G = torch.tensor(H2G(static_hgraph), dtype = torch.float32).to(device)
+                edge_index = H2EL(H2D(static_hgraph.T))
+                total = edge_index.max() + 1
+                edge_index, _ = coalesce(edge_index, None, total, total)
+                edge_index = ExtractV2E(edge_index)
+                edge_index[1] -= edge_index[1].min()
+                edge_index = edge_index.to(device)
+                flag = False
+            if args.struc == 'graph' and flag == True:
+                edge_index = Hyper2Graph(static_hgraph).to(device)
+                flag = False
+            output = model(sim_states, edge_index).squeeze()
+            patient_zero = patient_zero.squeeze()
 
             # Ensure the output and target have matching dimensions
-            batch_size, _ = output.size()
+            batch_size = 1
 
             for i in range(batch_size):
-                target_indices = torch.nonzero(patient_zero[i]).contiguous().view(-1)
-                _, indices = torch.sort(output[i], descending=True)
+                target_indices = torch.nonzero(patient_zero).contiguous().view(-1)
+                _, indices = torch.sort(output, descending=True)
                 ranks = torch.where(indices.unsqueeze(1) == target_indices)[0].float() + 1
-                print(ranks)
 
                 mrr += torch.sum(1.0 / ranks).item()
                 hits_at_1 += torch.sum(ranks <= 1).item()
                 hits_at_10 += torch.sum(ranks <= 10).item()
                 hits_at_100 += torch.sum(ranks <= 100).item()
                 total_samples += len(target_indices)
+
     mrr /= total_samples
     hits_at_1 /= total_samples
     hits_at_10 /= total_samples
@@ -76,32 +121,36 @@ def main():
     """
     Main file to run from the command line.
     """
+    from config import model_dict
+
     parser = argparse.ArgumentParser()
+    parser.add_argument("--dataset", type=str, default='random')
+    parser.add_argument("--model", type=str, default='TGCN', choices=model_dict.keys())
 
-    #Log directory
-    parser.add_argument("--log_path", type=str, default='test.log')
+    args, _ = parser.parse_known_args()
+    model_name = args.model
 
-    #Training Args
-    parser.add_argument("--seed", type=int, default=0)
-    parser.add_argument("--lr", type=float, default=0.01)
-    parser.add_argument("--epoch", type=int, default=50)
-    parser.add_argument("--timestep_hidden", type=int, default=10)
-    parser.add_argument("--batch_size", type=int, default=2)
-    parser.add_argument("--out_channels", type=int, default=8)
-    parser.add_argument("--hidden_size", type=int, default=256)
-    parser.add_argument("--mlp_layer", type=int, default=1)
+    model_args = model_dict[model_name]['default_args']
+    for arg, default in model_args.items():
+        parser.add_argument(f"--{arg}", type=type(default), default=default)
 
     args = parser.parse_args()
+    model = model_dict[model_name]['class']
 
     set_seed(args.seed)
-    log_path = f'./{args.log_path}'
+    log_path = f'./log/{args.dataset}/{args.model}'
+    init_path(log_path)
+    log_path += f'/tsh{args.timestep_hidden}_oc{args.out_channels}_lr{args.lr}-b{args.batch_size}.log'
     logging.basicConfig(filename=log_path, level=logging.INFO)
     logging.info(args)
     logging.info('******************* Training Started *******************')
 
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    device = torch.device('cuda:1' if torch.cuda.is_available() else 'cpu')
 
-    data = torch.load('./data/sim#0/Sim_H2ABM.pt')
+    if args.dataset == 'random':
+        data = torch.load('./data/sim#0/n2500_random_ic1.pt')
+    if args.dataset == 'h2abm':
+        data = torch.load('./data/sim#0/Sim_H2ABM_ic1.pt')
     print(data)
 
     horizon = data.hyperparameters['horizon']
@@ -118,25 +167,16 @@ def main():
     train_data, valid_data, test_data = HypergraphDataset(train_data), HypergraphDataset(valid_data), HypergraphDataset(test_data)
     train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True)
     valid_loader = DataLoader(valid_data, batch_size=args.batch_size, shuffle=True)
+    test_loader = DataLoader(test_data, batch_size=args.batch_size, shuffle=True)
 
-    # model = SDSTGCN(N = 2500, 
-    #                 in_channels = 360, 
-    #                 out_channels = 256, 
-    #                 num_blocks = 2, 
-    #                 kernel_size = 3, 
-    #                 spatial_out_channels = 256).to(device)
-
-    model = THGNN(in_channels = 3,
-                    out_channels = args.out_channels, 
-                    hidden_size = args.hidden_size,
-                    mlp_layer= args.mlp_layer,
+    model = model(in_channels = 3,
                     num_node = num_node,
-                    timesteps = horizon - timestep_hidden).to(device)
+                    timesteps = horizon - timestep_hidden,
+                    args = args).to(device)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
-    criterion = nn.BCELoss()
 
-    train(model, train_loader, valid_loader, criterion, optimizer, args.epoch, logging, device)
+    train(model, train_loader, valid_loader, test_loader, optimizer, args.epoch, logging, device, args)
     logging.info('******************* Training Finished *******************')
 
 if __name__ == "__main__":
