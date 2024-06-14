@@ -4,11 +4,11 @@ This is the official repo for our paper [Hypergraph Neural Network for Epidemic 
 
 # Running the Code
 
-This guide provides detailed instructions to set up and run the our. Follow the steps below to create a conda environment, simulate data, and run the tasks.
+This guide provides detailed instructions to set up and run the our code. Follow the steps below to create a conda environment, simulate data, and run the tasks.
 
 ## Step 1: Conda Environment Creation
 
-First, ensure you have Anaconda or Miniconda installed on your system. Then, follow these steps to create and activate a conda environment using the provided `env.yml` file.
+First, ensure you have Anaconda or Miniconda installed on your system. Then, follow these steps to create and activate a conda environment using the provided `env.txt` file.
 
 1. **Navigate to the project directory:**
     ```bash
@@ -17,7 +17,7 @@ First, ensure you have Anaconda or Miniconda installed on your system. Then, fol
 
 2. **Create the conda environment:**
     ```bash
-    conda env create -f env.yml
+    conda create --name hgnn4epi --file env.txt
     ```
 
 3. **Activate the conda environment:**
