@@ -12,14 +12,14 @@ def simulate(initial_case, num_sim, dynamic_hgraph, timestep, infection_rate, re
     result = []
     hgraph = []
     target = torch.zeros(size = (num_sim, num_node))
+    start = torch.randint(dynamic_hgraph.shape[0] - 20, size = (1, ))
+    static_hgraph = dynamic_hypergraph[start]
+    for j in range(start, start + 20):
+        static_hgraph = static_hgraph + dynamic_hypergraph[j]
+    static_hgraph = ((static_hgraph > 0) * 1).squeeze()
+
 
     for i in range(num_sim):
-
-        start = torch.randint(dynamic_hgraph.shape[0] - 20, size = (1, ))
-        static_hgraph = dynamic_hypergraph[start]
-        for j in range(start, start + 20):
-            static_hgraph = static_hgraph + dynamic_hypergraph[j]
-        static_hgraph = ((static_hgraph > 0) * 1).squeeze()
 
         print(f"# {i}th simulation || total contacts: {static_hgraph.sum()}") 
 
@@ -36,16 +36,16 @@ def simulate(initial_case, num_sim, dynamic_hgraph, timestep, infection_rate, re
                             recovery_rate=recovery_rate)
         
         preds = model(initial_states, static_hgraph, steps = None).unsqueeze(0)
-        static_hgraph = static_hgraph.unsqueeze(0)
-        hgraph.append(static_hgraph)
+        #static_hgraph = static_hgraph.unsqueeze(0)
+        #hgraph.append(static_hgraph)
         result.append(preds)
         target[i][index] = 1
     plot_sir_simulation(preds.squeeze())
     print('*** Simulation Completed ***')
     sim_states = torch.cat(result, dim = 0)
-    hgraph_log = torch.cat(hgraph, dim = 0)
+    #hgraph_log = torch.cat(hgraph, dim = 0)
 
-    return sim_states, target, hgraph_log
+    return sim_states, target, static_hgraph
 
 if __name__ == '__main__':
 
@@ -59,9 +59,9 @@ if __name__ == '__main__':
 
     num_sim = 100
     timestep = 120
-    infection_rate = 0.12
-    recovery_rate = 0.15
-    initial_case = 10
+    infection_rate = 0.001
+    recovery_rate = 0.03
+    initial_case = 1
 
     sim_states, patient_zero, static_hgraph = simulate(initial_case, num_sim, dynamic_hypergraph, timestep, infection_rate, recovery_rate)
 
@@ -77,4 +77,4 @@ if __name__ == '__main__':
     delattr(data, 'y')
     delattr(data, 'processed_y')
     print(data)
-    torch.save(data, './data/sim#0/Sim_H2ABM_0.pt')
+    torch.save(data, './data/sim#0/Sim_H2ABM_ic1_slow.pt')

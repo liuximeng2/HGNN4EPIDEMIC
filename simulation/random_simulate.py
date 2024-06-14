@@ -11,12 +11,12 @@ def simulate(num_node, num_hedge, edge_prob, initial_case, num_sim, timestep, in
     hgraph = []
     target = torch.zeros(size = (num_sim, num_node))
 
-    for i in range(num_sim):
+    edge_index = erdos_renyi_graph(num_node, edge_prob)
+    adj= torch.zeros((num_node, num_node), dtype=torch.float)
+    adj[edge_index[0], edge_index[1]] = 1.0
+    random_hgraph = adj[:num_hedge, :]
 
-        edge_index = erdos_renyi_graph(num_node, edge_prob)
-        adj= torch.zeros((num_node, num_node), dtype=torch.float)
-        adj[edge_index[0], edge_index[1]] = 1.0
-        random_hgraph = adj[:num_hedge, :]
+    for i in range(num_sim):
 
         print(f"# {i}th simulation || total contacts: {random_hgraph.sum()}") 
 
@@ -33,8 +33,8 @@ def simulate(num_node, num_hedge, edge_prob, initial_case, num_sim, timestep, in
                             recovery_rate=recovery_rate)
         
         preds = model(initial_states, random_hgraph, steps = None).unsqueeze(0)
-        random_hgraph = random_hgraph.unsqueeze(0)
-        hgraph.append(random_hgraph)
+        #random_hgraph = random_hgraph.unsqueeze(0)
+        #hgraph.append(random_hgraph)
         result.append(preds)
         target[i][index] = 1
 
@@ -43,21 +43,21 @@ def simulate(num_node, num_hedge, edge_prob, initial_case, num_sim, timestep, in
     plot_sir_simulation(preds.squeeze())
     print('*** Simulation Completed ***')
     sim_states = torch.cat(result, dim = 0)
-    hgraph_log = torch.cat(hgraph, dim = 0)
+    #hgraph_log = torch.cat(hgraph, dim = 0)
 
-    return sim_states, target, hgraph_log
+    return sim_states, target, random_hgraph
 
 if __name__ == '__main__':
 
     set_seed(0)
-    num_node = 2500
-    num_hedge = 500
-    edge_prob = 0.005
     num_sim = 100
+    num_node = 10000
+    num_hedge = 2000
+    edge_prob = 0.005
     timestep = 120
-    infection_rate = 0.03
-    recovery_rate = 0.03
-    initial_case = 10
+    infection_rate = 0.003
+    recovery_rate = 0.01
+    initial_case = 1
 
     sim_states, patient_zero, static_hgraph = simulate(num_node, num_hedge, edge_prob,initial_case, num_sim, timestep, infection_rate, recovery_rate)
 
@@ -67,7 +67,8 @@ if __name__ == '__main__':
     data.patient_zero = patient_zero
     data.hyperparameters = {'infection_rate': infection_rate,
                             'recovery_rate': recovery_rate,
-                            'horizon': timestep}
+                            'horizon': timestep,
+                            'initial_cases': initial_case}
     
     print(data)
-    torch.save(data, './data/sim#0/random_hgraph.pt')
+    torch.save(data, f'./data/sim#0/n1000_random_ic{initial_case}.pt')

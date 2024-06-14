@@ -1,7 +1,7 @@
 import random
+import os
 import numpy as np
 import torch
-
 from torch_geometric.data import Data
 
 def set_seed(seed):
@@ -17,7 +17,7 @@ def set_seed(seed):
     torch.cuda.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
 
-def split_dataset(data, train_ratio=0.5, valid_ratio=0.2, seed=0):
+def split_dataset(data, train_ratio=0.6, valid_ratio=0.2, seed=0):
     """
     Splits the torch_geometric data object into train, validation, and test sets.
     
@@ -30,7 +30,7 @@ def split_dataset(data, train_ratio=0.5, valid_ratio=0.2, seed=0):
     - dict: A dictionary containing the train, validation, and test sets.
     """
     set_seed(seed)
-    num_samples = data.static_hgraph.shape[0]
+    num_samples = data.sim_states.shape[0]
     indices = torch.randperm(num_samples)
     
     train_size = int(num_samples * train_ratio)
@@ -50,7 +50,8 @@ def split_dataset(data, train_ratio=0.5, valid_ratio=0.2, seed=0):
     
     train_data = Data(
         sim_states=data.sim_states[train_mask],
-        static_hgraph=data.static_hgraph[train_mask],
+        static_hgraph=data.static_hgraph,
+        #static_hgraph=data.static_hgraph[train_mask],
         patient_zero=data.patient_zero[train_mask],
         train_mask=train_mask,
         val_mask=None,
@@ -58,7 +59,8 @@ def split_dataset(data, train_ratio=0.5, valid_ratio=0.2, seed=0):
     )
     valid_data = Data(
         sim_states=data.sim_states[valid_mask],
-        static_hgraph=data.static_hgraph[valid_mask],
+        static_hgraph=data.static_hgraph,
+        #static_hgraph=data.static_hgraph[valid_mask],
         patient_zero=data.patient_zero[valid_mask],
         train_mask=None,
         val_mask=valid_mask,
@@ -66,7 +68,8 @@ def split_dataset(data, train_ratio=0.5, valid_ratio=0.2, seed=0):
     )
     test_data = Data(
         sim_states=data.sim_states[test_mask],
-        static_hgraph=data.static_hgraph[test_mask],
+        static_hgraph=data.static_hgraph,
+        #static_hgraph=data.static_hgraph[test_mask],
         patient_zero=data.patient_zero[test_mask],
         train_mask=None,
         val_mask=None,
@@ -76,4 +79,16 @@ def split_dataset(data, train_ratio=0.5, valid_ratio=0.2, seed=0):
     return train_data, valid_data, test_data
 
 
+def init_path(directory_path):
+    """
+    Create a directory if it does not exist.
 
+    Parameters:
+    directory_path (str): The path of the directory to create.
+
+    Returns:
+    None
+    """
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
+        print(f"Directory '{directory_path}' created.")
