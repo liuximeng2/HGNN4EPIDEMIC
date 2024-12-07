@@ -1,7 +1,3 @@
-# HGNN4EPIDEMIC
-
-This is the official repo for our paper [Hypergraph Neural Network for Epidemic Modeling](https://openreview.net/forum?id=BTzbVsgoyx&referrer=%5BAuthor%20Console%5D(%2Fgroup%3Fid%3DKDD.org%2F2024%2FWorkshop%2FepiDAMIK%2FAuthors%23your-submissions)). The dataset can be accessed through the google drive [link](https://drive.google.com/file/d/1GSK52o9AofOzxS2dHcrEWcebClBNyZhH/view?usp=sharing). 
-
 # Running the Code
 
 This guide provides detailed instructions to set up and run the our code. Follow the steps below to create a conda environment, simulate data, and run the tasks.
@@ -46,5 +42,5 @@ Once the data is simulated, you can run the task using `train.py`.
 
 1. **Run the task with the specified model and dataset:**
     ```bash
-    python train.py --model THGNN --dataset "h2abm"
+    python train.py --model THGNN --dataset "UVA"
     ```
