@@ -35,6 +35,7 @@ def split_dataset(data, train_ratio=0.6, valid_ratio=0.2, seed=0):
     
     train_size = int(num_samples * train_ratio)
     valid_size = int(num_samples * valid_ratio)
+    print(f"Train size: {train_size}, Validation size: {valid_size}, Test size: {num_samples - train_size - valid_size}")
     
     train_indices = indices[:train_size]
     valid_indices = indices[train_size:train_size + valid_size]
@@ -50,27 +51,30 @@ def split_dataset(data, train_ratio=0.6, valid_ratio=0.2, seed=0):
     
     train_data = Data(
         sim_states=data.sim_states[train_mask],
-        static_hgraph=data.static_hgraph,
-        #static_hgraph=data.static_hgraph[train_mask],
+        dynamic_hgraph=data.dynamic_hypergraph,
         patient_zero=data.patient_zero[train_mask],
+        forecast_label=data.forecast_label[train_mask],
+        dynamic_edge_list=data.dynamic_edge_list,
         train_mask=train_mask,
         val_mask=None,
         test_mask=None
     )
     valid_data = Data(
         sim_states=data.sim_states[valid_mask],
-        static_hgraph=data.static_hgraph,
-        #static_hgraph=data.static_hgraph[valid_mask],
+        dynamic_hgraph=data.dynamic_hypergraph,
         patient_zero=data.patient_zero[valid_mask],
+        forecast_label=data.forecast_label[valid_mask],
+        dynamic_edge_list=data.dynamic_edge_list,
         train_mask=None,
         val_mask=valid_mask,
         test_mask=None
     )
     test_data = Data(
         sim_states=data.sim_states[test_mask],
-        static_hgraph=data.static_hgraph,
-        #static_hgraph=data.static_hgraph[test_mask],
+        dynamic_hgraph=data.dynamic_hypergraph,
         patient_zero=data.patient_zero[test_mask],
+        forecast_label=data.forecast_label[test_mask],        
+        dynamic_edge_list=data.dynamic_edge_list,
         train_mask=None,
         val_mask=None,
         test_mask=test_mask
