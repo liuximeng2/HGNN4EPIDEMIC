@@ -1,0 +1,141 @@
+INFO:root:2024-12-06 13:09:53.874008
+INFO:root:Namespace(K=3, agg=False, batch_size=1, dataset='UVA', device='cuda', dropout=0.5, epochs=100, in_channels=3, known_interval=10, lr=0.0005, model='MSTGCN', nb_block=2, nb_chev_filter=256, nb_time_filter=5, num_for_predict=1, num_of_vertices=2500, partial=True, pred_interval=10, seed=0, time_strides=1, timestep_hidden=20, weight_decay=0.0001)
+INFO:root:Sparse Hypergraph
+INFO:root:******************* Training Started *******************
+INFO:root:Epoch 0/100, Loss: 1.153
+INFO:root:Train: F1: 0.403, Acc: 0.959, AUROC: 0.705, MSE: 64.067
+INFO:root:Valid: F1: 0.335, Acc: 0.964, AUROC: 0.667, MSE: 105.800
+INFO:root:Test: F1: 0.376, Acc: 0.962, AUROC: 0.696, MSE: 8.450
+INFO:root:Epoch 1/100, Loss: 0.888
+INFO:root:Epoch 2/100, Loss: 0.882
+INFO:root:Epoch 3/100, Loss: 0.851
+INFO:root:Epoch 4/100, Loss: 0.673
+INFO:root:Epoch 5/100, Loss: 0.697
+INFO:root:Epoch 6/100, Loss: 0.725
+INFO:root:Epoch 7/100, Loss: 0.685
+INFO:root:Epoch 8/100, Loss: 0.575
+INFO:root:Epoch 9/100, Loss: 0.523
+INFO:root:Epoch 10/100, Loss: 0.571
+INFO:root:Train: F1: 0.443, Acc: 0.941, AUROC: 0.667, MSE: 7238.017
+INFO:root:Valid: F1: 0.362, Acc: 0.942, AUROC: 0.636, MSE: 61494.051
+INFO:root:Test: F1: 0.417, Acc: 0.943, AUROC: 0.657, MSE: 54601.250
+INFO:root:Epoch 11/100, Loss: 0.599
+INFO:root:Epoch 12/100, Loss: 0.676
+INFO:root:Epoch 13/100, Loss: 0.508
+INFO:root:Epoch 14/100, Loss: 0.588
+INFO:root:Epoch 15/100, Loss: 0.489
+INFO:root:Epoch 16/100, Loss: 0.547
+INFO:root:Epoch 17/100, Loss: 0.553
+INFO:root:Epoch 18/100, Loss: 0.629
+INFO:root:Epoch 19/100, Loss: 0.509
+INFO:root:Epoch 20/100, Loss: 0.584
+INFO:root:Train: F1: 0.352, Acc: 0.881, AUROC: 0.614, MSE: 154940.016
+INFO:root:Valid: F1: 0.286, Acc: 0.877, AUROC: 0.593, MSE: 466345.812
+INFO:root:Test: F1: 0.324, Acc: 0.879, AUROC: 0.605, MSE: 458742.062
+INFO:root:Epoch 21/100, Loss: 0.486
+INFO:root:Epoch 22/100, Loss: 0.523
+INFO:root:Epoch 23/100, Loss: 0.528
+INFO:root:Epoch 24/100, Loss: 0.682
+INFO:root:Epoch 25/100, Loss: 0.505
+INFO:root:Epoch 26/100, Loss: 0.494
+INFO:root:Epoch 27/100, Loss: 0.433
+INFO:root:Epoch 28/100, Loss: 0.414
+INFO:root:Epoch 29/100, Loss: 0.512
+INFO:root:Epoch 30/100, Loss: 0.506
+INFO:root:Train: F1: 0.359, Acc: 0.884, AUROC: 0.617, MSE: 138336.016
+INFO:root:Valid: F1: 0.292, Acc: 0.881, AUROC: 0.595, MSE: 436305.812
+INFO:root:Test: F1: 0.330, Acc: 0.883, AUROC: 0.607, MSE: 431592.188
+INFO:root:Epoch 31/100, Loss: 0.405
+INFO:root:Epoch 32/100, Loss: 0.399
+INFO:root:Epoch 33/100, Loss: 0.457
+INFO:root:Epoch 34/100, Loss: 0.381
+INFO:root:Epoch 35/100, Loss: 0.417
+INFO:root:Epoch 36/100, Loss: 0.573
+INFO:root:Epoch 37/100, Loss: 0.416
+INFO:root:Epoch 38/100, Loss: 0.430
+INFO:root:Epoch 39/100, Loss: 0.421
+INFO:root:Epoch 40/100, Loss: 0.365
+INFO:root:Train: F1: 0.459, Acc: 0.937, AUROC: 0.668, MSE: 27520.416
+INFO:root:Valid: F1: 0.374, Acc: 0.936, AUROC: 0.636, MSE: 96049.797
+INFO:root:Test: F1: 0.430, Acc: 0.938, AUROC: 0.657, MSE: 93161.250
+INFO:root:Epoch 41/100, Loss: 0.390
+INFO:root:Epoch 42/100, Loss: 0.432
+INFO:root:Epoch 43/100, Loss: 0.370
+INFO:root:Epoch 44/100, Loss: 0.476
+INFO:root:Epoch 45/100, Loss: 0.419
+INFO:root:Epoch 46/100, Loss: 0.390
+INFO:root:Epoch 47/100, Loss: 0.415
+INFO:root:Epoch 48/100, Loss: 0.379
+INFO:root:Epoch 49/100, Loss: 0.396
+INFO:root:Epoch 50/100, Loss: 0.392
+INFO:root:Train: F1: 0.426, Acc: 0.921, AUROC: 0.649, MSE: 44499.266
+INFO:root:Valid: F1: 0.346, Acc: 0.919, AUROC: 0.621, MSE: 185666.453
+INFO:root:Test: F1: 0.398, Acc: 0.921, AUROC: 0.638, MSE: 181641.797
+INFO:root:Epoch 51/100, Loss: 0.438
+INFO:root:Epoch 52/100, Loss: 0.356
+INFO:root:Epoch 53/100, Loss: 0.438
+INFO:root:Epoch 54/100, Loss: 0.414
+INFO:root:Epoch 55/100, Loss: 0.443
+INFO:root:Epoch 56/100, Loss: 0.452
+INFO:root:Epoch 57/100, Loss: 0.432
+INFO:root:Epoch 58/100, Loss: 0.385
+INFO:root:Epoch 59/100, Loss: 0.424
+INFO:root:Epoch 60/100, Loss: 0.425
+INFO:root:Train: F1: 0.432, Acc: 0.923, AUROC: 0.651, MSE: 55146.016
+INFO:root:Valid: F1: 0.351, Acc: 0.920, AUROC: 0.623, MSE: 184320.000
+INFO:root:Test: F1: 0.401, Acc: 0.922, AUROC: 0.640, MSE: 176344.203
+INFO:root:Epoch 61/100, Loss: 0.452
+INFO:root:Epoch 62/100, Loss: 0.356
+INFO:root:Epoch 63/100, Loss: 0.432
+INFO:root:Epoch 64/100, Loss: 0.412
+INFO:root:Epoch 65/100, Loss: 0.398
+INFO:root:Epoch 66/100, Loss: 0.369
+INFO:root:Epoch 67/100, Loss: 0.354
+INFO:root:Epoch 68/100, Loss: 0.492
+INFO:root:Epoch 69/100, Loss: 0.453
+INFO:root:Epoch 70/100, Loss: 0.391
+INFO:root:Train: F1: 0.430, Acc: 0.920, AUROC: 0.649, MSE: 37700.266
+INFO:root:Valid: F1: 0.349, Acc: 0.917, AUROC: 0.621, MSE: 204626.453
+INFO:root:Test: F1: 0.401, Acc: 0.919, AUROC: 0.639, MSE: 196614.453
+INFO:root:Epoch 71/100, Loss: 0.423
+INFO:root:Epoch 72/100, Loss: 0.382
+INFO:root:Epoch 73/100, Loss: 0.340
+INFO:root:Epoch 74/100, Loss: 0.340
+INFO:root:Epoch 75/100, Loss: 0.342
+INFO:root:Epoch 76/100, Loss: 0.380
+INFO:root:Epoch 77/100, Loss: 0.385
+INFO:root:Epoch 78/100, Loss: 0.408
+INFO:root:Epoch 79/100, Loss: 0.411
+INFO:root:Epoch 80/100, Loss: 0.476
+INFO:root:Train: F1: 0.423, Acc: 0.916, AUROC: 0.646, MSE: 96882.016
+INFO:root:Valid: F1: 0.343, Acc: 0.913, AUROC: 0.618, MSE: 234361.250
+INFO:root:Test: F1: 0.393, Acc: 0.915, AUROC: 0.635, MSE: 224932.047
+INFO:root:Epoch 81/100, Loss: 0.437
+INFO:root:Epoch 82/100, Loss: 0.455
+INFO:root:Epoch 83/100, Loss: 0.421
+INFO:root:Epoch 84/100, Loss: 0.379
+INFO:root:Epoch 85/100, Loss: 0.365
+INFO:root:Epoch 86/100, Loss: 0.339
+INFO:root:Epoch 87/100, Loss: 0.387
+INFO:root:Epoch 88/100, Loss: 0.431
+INFO:root:Epoch 89/100, Loss: 0.431
+INFO:root:Epoch 90/100, Loss: 0.355
+INFO:root:Train: F1: 0.452, Acc: 0.930, AUROC: 0.661, MSE: 33041.066
+INFO:root:Valid: F1: 0.367, Acc: 0.928, AUROC: 0.631, MSE: 150337.797
+INFO:root:Test: F1: 0.423, Acc: 0.930, AUROC: 0.650, MSE: 141288.047
+INFO:root:Epoch 91/100, Loss: 0.415
+INFO:root:Epoch 92/100, Loss: 0.340
+INFO:root:Epoch 93/100, Loss: 0.558
+INFO:root:Epoch 94/100, Loss: 0.338
+INFO:root:Epoch 95/100, Loss: 0.332
+INFO:root:Epoch 96/100, Loss: 0.470
+INFO:root:Epoch 97/100, Loss: 0.402
+INFO:root:Epoch 98/100, Loss: 0.347
+INFO:root:Epoch 99/100, Loss: 0.387
+INFO:root:Epoch 100/100, Loss: 0.410
+INFO:root:Train: F1: 0.413, Acc: 0.910, AUROC: 0.641, MSE: 72801.664
+INFO:root:Valid: F1: 0.336, Acc: 0.907, AUROC: 0.614, MSE: 279424.812
+INFO:root:Test: F1: 0.384, Acc: 0.909, AUROC: 0.630, MSE: 267036.062
+INFO:root:Final Result:
+INFO:root:f1: 0.376, acc: 0.962, auroc: 0.696, mse: 8.450
+INFO:root:******************* Training Finished *******************

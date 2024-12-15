@@ -1,0 +1,24 @@
+INFO:root:2024-11-25 12:19:01.983108
+INFO:root:Namespace(agg=False, batch_size=1, dataset='UVA', device='cuda', dropout=0.5, epochs=100, hidden_channels=256, in_channels=3, known_interval=10, lr=0.0005, mlp_layer=2, model='DTHGNN', nb_time_filter=5, num_for_predict=1, out_channels=8, partial=True, seed=0, spatial_layer=1, temporal_layer=2, time_strides=1, timestep_hidden=20, weight_decay=0.0001, **{'pred_interva;': 10})
+INFO:root:Sparse Hypergraph
+INFO:root:2024-11-25 12:19:25.335999
+INFO:root:Namespace(agg=False, batch_size=1, dataset='UVA', device='cuda', dropout=0.5, epochs=100, hidden_channels=256, in_channels=3, known_interval=10, lr=0.0005, mlp_layer=2, model='DTHGNN', nb_time_filter=5, num_for_predict=1, out_channels=8, partial=True, pred_interval=10, seed=0, spatial_layer=1, temporal_layer=2, time_strides=1, timestep_hidden=20, weight_decay=0.0001)
+INFO:root:Sparse Hypergraph
+INFO:root:2024-11-25 12:21:25.035049
+INFO:root:Namespace(agg=False, batch_size=1, dataset='UVA', device='cuda', dropout=0.5, epochs=100, hidden_channels=256, in_channels=3, known_interval=10, lr=0.0005, mlp_layer=2, model='DTHGNN', nb_time_filter=5, num_for_predict=1, out_channels=8, partial=True, pred_interval=10, seed=0, spatial_layer=1, temporal_layer=2, time_strides=1, timestep_hidden=20, weight_decay=0.0001)
+INFO:root:Sparse Hypergraph
+INFO:root:2024-11-25 12:22:44.640252
+INFO:root:Namespace(agg=False, batch_size=1, dataset='UVA', device='cuda', dropout=0.5, epochs=100, hidden_channels=256, in_channels=3, known_interval=10, lr=0.0005, mlp_layer=2, model='DTHGNN', nb_time_filter=5, num_for_predict=1, out_channels=8, partial=True, pred_interval=10, seed=0, spatial_layer=1, temporal_layer=2, time_strides=1, timestep_hidden=20, weight_decay=0.0001)
+INFO:root:Sparse Hypergraph
+INFO:root:2024-11-25 12:24:14.519444
+INFO:root:Namespace(agg=False, batch_size=1, dataset='UVA', device='cuda', dropout=0.5, epochs=100, hidden_channels=256, in_channels=3, known_interval=10, lr=0.0005, mlp_layer=2, model='DTHGNN', nb_time_filter=5, num_for_predict=1, out_channels=8, partial=True, pred_interval=10, seed=0, spatial_layer=1, temporal_layer=2, time_strides=1, timestep_hidden=20, weight_decay=0.0001)
+INFO:root:Sparse Hypergraph
+INFO:root:2024-11-25 13:01:36.401374
+INFO:root:Namespace(agg=False, batch_size=1, dataset='UVA', device='cuda', dropout=0.5, epochs=100, hidden_channels=256, in_channels=3, known_interval=10, lr=0.0005, mlp_layer=2, model='DTHGNN', nb_time_filter=5, num_for_predict=1, out_channels=8, partial=True, pred_interval=10, seed=0, spatial_layer=1, temporal_layer=2, time_strides=1, timestep_hidden=20, weight_decay=0.0001)
+INFO:root:Sparse Hypergraph
+INFO:root:2024-11-25 13:03:34.126524
+INFO:root:Namespace(agg=False, batch_size=1, dataset='UVA', device='cuda', dropout=0.5, epochs=100, hidden_channels=256, in_channels=3, known_interval=10, lr=0.0005, mlp_layer=2, model='DTHGNN', nb_time_filter=5, num_for_predict=1, out_channels=8, partial=True, pred_interval=10, seed=0, spatial_layer=1, temporal_layer=2, time_strides=1, timestep_hidden=20, weight_decay=0.0001)
+INFO:root:Sparse Hypergraph
+INFO:root:2024-11-25 13:04:09.776027
+INFO:root:Namespace(agg=False, batch_size=1, dataset='UVA', device='cuda', dropout=0.5, epochs=100, hidden_channels=256, in_channels=3, known_interval=10, lr=0.0005, mlp_layer=2, model='DTHGNN', nb_time_filter=5, num_for_predict=1, out_channels=8, partial=True, pred_interval=10, seed=0, spatial_layer=1, temporal_layer=2, time_strides=1, timestep_hidden=20, weight_decay=0.0001)
+INFO:root:Sparse Hypergraph

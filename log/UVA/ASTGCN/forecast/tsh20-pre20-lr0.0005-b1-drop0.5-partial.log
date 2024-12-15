@@ -1,0 +1,38 @@
+INFO:root:2024-12-06 13:59:14.104003
+INFO:root:Namespace(K=3, agg=False, batch_size=1, dataset='UVA', device='cuda', dropout=0.5, epochs=200, in_channels=3, known_interval=10, lr=0.0005, model='ASTGCN', nb_block=2, nb_chev_filter=256, nb_time_filter=5, num_for_predict=1, num_of_vertices=2500, partial=True, pred_interval=20, seed=0, time_strides=1, timestep_hidden=20, weight_decay=0.0)
+INFO:root:Sparse Hypergraph
+INFO:root:******************* Training Started *******************
+INFO:root:Epoch 0/200, Loss: 1.240
+INFO:root:Train: F1: 0.136, Acc: 0.903, AUROC: 0.542, MSE: 843.750
+INFO:root:Valid: F1: 0.110, Acc: 0.911, AUROC: 0.534, MSE: 59078.449
+INFO:root:Test: F1: 0.123, Acc: 0.908, AUROC: 0.538, MSE: 63619.199
+INFO:root:Epoch 1/200, Loss: 1.160
+INFO:root:Epoch 2/200, Loss: 1.198
+INFO:root:Epoch 3/200, Loss: 1.062
+INFO:root:Epoch 4/200, Loss: 1.095
+INFO:root:Epoch 5/200, Loss: 1.069
+INFO:root:Epoch 6/200, Loss: 1.084
+INFO:root:Epoch 7/200, Loss: 1.035
+INFO:root:Epoch 8/200, Loss: 1.075
+INFO:root:Epoch 9/200, Loss: 1.014
+INFO:root:Epoch 10/200, Loss: 1.052
+INFO:root:Train: F1: 0.284, Acc: 0.908, AUROC: 0.601, MSE: 26754.816
+INFO:root:Valid: F1: 0.233, Acc: 0.915, AUROC: 0.582, MSE: 118734.047
+INFO:root:Test: F1: 0.269, Acc: 0.913, AUROC: 0.597, MSE: 156645.000
+INFO:root:Epoch 11/200, Loss: 1.011
+INFO:root:Epoch 12/200, Loss: 1.532
+INFO:root:Epoch 13/200, Loss: 1.009
+INFO:root:Epoch 14/200, Loss: 1.061
+INFO:root:Epoch 15/200, Loss: 1.159
+INFO:root:Epoch 16/200, Loss: 1.000
+INFO:root:Epoch 17/200, Loss: 0.966
+INFO:root:Epoch 18/200, Loss: 1.121
+INFO:root:Epoch 19/200, Loss: 0.935
+INFO:root:Epoch 20/200, Loss: 1.381
+INFO:root:Train: F1: 0.458, Acc: 0.957, AUROC: 0.817, MSE: 11234.017
+INFO:root:2024-12-06 15:37:39.788224
+INFO:root:Namespace(K=3, agg=False, batch_size=1, dataset='UVA', device='cuda', dropout=0.5, epochs=200, in_channels=3, known_interval=10, lr=0.0005, model='ASTGCN', nb_block=2, nb_chev_filter=256, nb_time_filter=5, num_for_predict=1, num_of_vertices=2500, partial=True, pred_interval=20, seed=0, time_strides=1, timestep_hidden=20, weight_decay=0.0)
+INFO:root:Sparse Hypergraph
+INFO:root:******************* Training Started *******************
+INFO:root:Epoch 0/200, Loss: 1.349
+INFO:root:Train: F1: 0.017, Acc: 0.946, AUROC: 0.618, MSE: 176366.812

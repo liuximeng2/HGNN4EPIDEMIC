@@ -1,0 +1,531 @@
+INFO:root:2024-11-23 13:06:28.283287
+INFO:root:Namespace(agg=False, batch_size=1, dataset='UVA', device='cuda:1', dropout=0.5, epoch=100, epochs=400, hidden_channels=256, in_channels=3, len_input=30, lr=0.0005, mlp_layer=2, model='DTHGNN', nb_time_filter=2, num_for_predict=1, out_channels=8, partial=True, seed=0, spatial_layer=1, struct='RNN-GNN', temporal_layer=2, time_strides=1, timestep_hidden=20, weight_decay=0.0001)
+INFO:root:Sparse Hypergraph
+INFO:root:******************* Training Started *******************
+INFO:root:Epoch 0/400, Loss: 1.297
+INFO:root:Train: MRR: 0.194, Hits@1: 0.133, Hits@10: 0.317, Hits@100: 0.650
+INFO:root:Valid: MRR: 0.184, Hits@1: 0.150, Hits@10: 0.250, Hits@100: 0.650
+INFO:root:Test: MRR: 0.016, Hits@1: 0.000, Hits@10: 0.050, Hits@100: 0.300
+INFO:root:Epoch 1/400, Loss: 1.293
+INFO:root:Epoch 2/400, Loss: 1.029
+INFO:root:Epoch 3/400, Loss: 0.952
+INFO:root:Epoch 4/400, Loss: 1.067
+INFO:root:Epoch 5/400, Loss: 0.561
+INFO:root:Epoch 6/400, Loss: 0.274
+INFO:root:Epoch 7/400, Loss: 0.266
+INFO:root:Epoch 8/400, Loss: 0.150
+INFO:root:Epoch 9/400, Loss: 0.138
+INFO:root:Epoch 10/400, Loss: 0.592
+INFO:root:Train: MRR: 0.495, Hits@1: 0.300, Hits@10: 0.883, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.498, Hits@1: 0.300, Hits@10: 0.950, Hits@100: 1.000
+INFO:root:Test: MRR: 0.311, Hits@1: 0.050, Hits@10: 0.950, Hits@100: 1.000
+INFO:root:Epoch 11/400, Loss: 0.094
+INFO:root:Epoch 12/400, Loss: 0.077
+INFO:root:Epoch 13/400, Loss: 0.082
+INFO:root:Epoch 14/400, Loss: 0.048
+INFO:root:Epoch 15/400, Loss: 0.045
+INFO:root:Epoch 16/400, Loss: 0.040
+INFO:root:Epoch 17/400, Loss: 0.053
+INFO:root:Epoch 18/400, Loss: 0.037
+INFO:root:Epoch 19/400, Loss: 0.032
+INFO:root:Epoch 20/400, Loss: 0.033
+INFO:root:Train: MRR: 0.640, Hits@1: 0.433, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.592, Hits@1: 0.350, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.617, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 21/400, Loss: 0.026
+INFO:root:Epoch 22/400, Loss: 0.018
+INFO:root:Epoch 23/400, Loss: 0.029
+INFO:root:Epoch 24/400, Loss: 0.101
+INFO:root:Epoch 25/400, Loss: 0.030
+INFO:root:Epoch 26/400, Loss: 0.009
+INFO:root:Epoch 27/400, Loss: 0.031
+INFO:root:Epoch 28/400, Loss: 0.040
+INFO:root:Epoch 29/400, Loss: 0.009
+INFO:root:Epoch 30/400, Loss: 0.014
+INFO:root:Train: MRR: 0.642, Hits@1: 0.417, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.595, Hits@1: 0.350, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.595, Hits@1: 0.350, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 31/400, Loss: 0.018
+INFO:root:Epoch 32/400, Loss: 0.012
+INFO:root:Epoch 33/400, Loss: 0.031
+INFO:root:Epoch 34/400, Loss: 0.012
+INFO:root:Epoch 35/400, Loss: 0.011
+INFO:root:Epoch 36/400, Loss: 0.016
+INFO:root:Epoch 37/400, Loss: 0.049
+INFO:root:Epoch 38/400, Loss: 0.039
+INFO:root:Epoch 39/400, Loss: 0.010
+INFO:root:Epoch 40/400, Loss: 0.014
+INFO:root:Train: MRR: 0.667, Hits@1: 0.450, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.601, Hits@1: 0.350, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.606, Hits@1: 0.350, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 41/400, Loss: 0.027
+INFO:root:Epoch 42/400, Loss: 0.018
+INFO:root:Epoch 43/400, Loss: 0.047
+INFO:root:Epoch 44/400, Loss: 0.010
+INFO:root:Epoch 45/400, Loss: 0.021
+INFO:root:Epoch 46/400, Loss: 0.021
+INFO:root:Epoch 47/400, Loss: 0.013
+INFO:root:Epoch 48/400, Loss: 0.013
+INFO:root:Epoch 49/400, Loss: 0.012
+INFO:root:Epoch 50/400, Loss: 0.028
+INFO:root:Train: MRR: 0.697, Hits@1: 0.500, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.609, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.568, Hits@1: 0.250, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 51/400, Loss: 0.012
+INFO:root:Epoch 52/400, Loss: 0.011
+INFO:root:Epoch 53/400, Loss: 0.069
+INFO:root:Epoch 54/400, Loss: 0.070
+INFO:root:Epoch 55/400, Loss: 0.012
+INFO:root:Epoch 56/400, Loss: 0.008
+INFO:root:Epoch 57/400, Loss: 0.015
+INFO:root:Epoch 58/400, Loss: 0.007
+INFO:root:Epoch 59/400, Loss: 0.023
+INFO:root:Epoch 60/400, Loss: 0.014
+INFO:root:Train: MRR: 0.709, Hits@1: 0.500, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.617, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.564, Hits@1: 0.250, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 61/400, Loss: 0.062
+INFO:root:Epoch 62/400, Loss: 0.007
+INFO:root:Epoch 63/400, Loss: 0.018
+INFO:root:Epoch 64/400, Loss: 0.011
+INFO:root:Epoch 65/400, Loss: 0.017
+INFO:root:Epoch 66/400, Loss: 0.003
+INFO:root:Epoch 67/400, Loss: 0.009
+INFO:root:Epoch 68/400, Loss: 0.020
+INFO:root:Epoch 69/400, Loss: 0.014
+INFO:root:Epoch 70/400, Loss: 0.016
+INFO:root:Train: MRR: 0.768, Hits@1: 0.617, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.642, Hits@1: 0.450, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.581, Hits@1: 0.300, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 71/400, Loss: 0.004
+INFO:root:Epoch 72/400, Loss: 0.017
+INFO:root:Epoch 73/400, Loss: 0.006
+INFO:root:Epoch 74/400, Loss: 0.006
+INFO:root:Epoch 75/400, Loss: 0.006
+INFO:root:Epoch 76/400, Loss: 0.022
+INFO:root:Epoch 77/400, Loss: 0.017
+INFO:root:Epoch 78/400, Loss: 0.006
+INFO:root:Epoch 79/400, Loss: 0.004
+INFO:root:Epoch 80/400, Loss: 0.007
+INFO:root:Train: MRR: 0.801, Hits@1: 0.683, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.693, Hits@1: 0.550, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.623, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 81/400, Loss: 0.023
+INFO:root:Epoch 82/400, Loss: 0.009
+INFO:root:Epoch 83/400, Loss: 0.022
+INFO:root:Epoch 84/400, Loss: 0.011
+INFO:root:Epoch 85/400, Loss: 0.009
+INFO:root:Epoch 86/400, Loss: 0.022
+INFO:root:Epoch 87/400, Loss: 0.005
+INFO:root:Epoch 88/400, Loss: 0.024
+INFO:root:Epoch 89/400, Loss: 0.005
+INFO:root:Epoch 90/400, Loss: 0.022
+INFO:root:Train: MRR: 0.789, Hits@1: 0.650, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.676, Hits@1: 0.500, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.623, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 91/400, Loss: 0.016
+INFO:root:Epoch 92/400, Loss: 0.014
+INFO:root:Epoch 93/400, Loss: 0.014
+INFO:root:Epoch 94/400, Loss: 0.004
+INFO:root:Epoch 95/400, Loss: 0.006
+INFO:root:Epoch 96/400, Loss: 0.009
+INFO:root:Epoch 97/400, Loss: 0.008
+INFO:root:Epoch 98/400, Loss: 0.005
+INFO:root:Epoch 99/400, Loss: 0.003
+INFO:root:Epoch 100/400, Loss: 0.014
+INFO:root:Train: MRR: 0.795, Hits@1: 0.650, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.680, Hits@1: 0.500, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.623, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 101/400, Loss: 0.013
+INFO:root:Epoch 102/400, Loss: 0.014
+INFO:root:Epoch 103/400, Loss: 0.025
+INFO:root:Epoch 104/400, Loss: 0.014
+INFO:root:Epoch 105/400, Loss: 0.005
+INFO:root:Epoch 106/400, Loss: 0.024
+INFO:root:Epoch 107/400, Loss: 0.005
+INFO:root:Epoch 108/400, Loss: 0.023
+INFO:root:Epoch 109/400, Loss: 0.005
+INFO:root:Epoch 110/400, Loss: 0.015
+INFO:root:Train: MRR: 0.797, Hits@1: 0.650, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.678, Hits@1: 0.500, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.623, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 111/400, Loss: 0.022
+INFO:root:Epoch 112/400, Loss: 0.015
+INFO:root:Epoch 113/400, Loss: 0.023
+INFO:root:Epoch 114/400, Loss: 0.024
+INFO:root:Epoch 115/400, Loss: 0.022
+INFO:root:Epoch 116/400, Loss: 0.008
+INFO:root:Epoch 117/400, Loss: 0.005
+INFO:root:Epoch 118/400, Loss: 0.003
+INFO:root:Epoch 119/400, Loss: 0.003
+INFO:root:Epoch 120/400, Loss: 0.003
+INFO:root:Train: MRR: 0.796, Hits@1: 0.650, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.678, Hits@1: 0.500, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.623, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 121/400, Loss: 0.015
+INFO:root:Epoch 122/400, Loss: 0.004
+INFO:root:Epoch 123/400, Loss: 0.051
+INFO:root:Epoch 124/400, Loss: 0.013
+INFO:root:Epoch 125/400, Loss: 0.024
+INFO:root:Epoch 126/400, Loss: 0.007
+INFO:root:Epoch 127/400, Loss: 0.014
+INFO:root:Epoch 128/400, Loss: 0.004
+INFO:root:Epoch 129/400, Loss: 0.011
+INFO:root:Epoch 130/400, Loss: 0.012
+INFO:root:Train: MRR: 0.818, Hits@1: 0.667, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.699, Hits@1: 0.500, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.643, Hits@1: 0.450, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 131/400, Loss: 0.013
+INFO:root:Epoch 132/400, Loss: 0.005
+INFO:root:Epoch 133/400, Loss: 0.005
+INFO:root:Epoch 134/400, Loss: 0.005
+INFO:root:Epoch 135/400, Loss: 0.004
+INFO:root:Epoch 136/400, Loss: 0.023
+INFO:root:Epoch 137/400, Loss: 0.005
+INFO:root:Epoch 138/400, Loss: 0.006
+INFO:root:Epoch 139/400, Loss: 0.023
+INFO:root:Epoch 140/400, Loss: 0.005
+INFO:root:Train: MRR: 0.810, Hits@1: 0.667, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.682, Hits@1: 0.500, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.618, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 141/400, Loss: 0.002
+INFO:root:Epoch 142/400, Loss: 0.005
+INFO:root:Epoch 143/400, Loss: 0.012
+INFO:root:Epoch 144/400, Loss: 0.005
+INFO:root:Epoch 145/400, Loss: 0.024
+INFO:root:Epoch 146/400, Loss: 0.003
+INFO:root:Epoch 147/400, Loss: 0.007
+INFO:root:Epoch 148/400, Loss: 0.005
+INFO:root:Epoch 149/400, Loss: 0.006
+INFO:root:Epoch 150/400, Loss: 0.006
+INFO:root:Train: MRR: 0.801, Hits@1: 0.650, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.662, Hits@1: 0.450, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.618, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 151/400, Loss: 0.004
+INFO:root:Epoch 152/400, Loss: 0.005
+INFO:root:Epoch 153/400, Loss: 0.004
+INFO:root:Epoch 154/400, Loss: 0.005
+INFO:root:Epoch 155/400, Loss: 0.004
+INFO:root:Epoch 156/400, Loss: 0.016
+INFO:root:Epoch 157/400, Loss: 0.011
+INFO:root:Epoch 158/400, Loss: 0.017
+INFO:root:Epoch 159/400, Loss: 0.005
+INFO:root:Epoch 160/400, Loss: 0.014
+INFO:root:Train: MRR: 0.823, Hits@1: 0.683, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.662, Hits@1: 0.450, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.627, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 161/400, Loss: 0.005
+INFO:root:Epoch 162/400, Loss: 0.010
+INFO:root:Epoch 163/400, Loss: 0.003
+INFO:root:Epoch 164/400, Loss: 0.024
+INFO:root:Epoch 165/400, Loss: 0.002
+INFO:root:Epoch 166/400, Loss: 0.003
+INFO:root:Epoch 167/400, Loss: 0.024
+INFO:root:Epoch 168/400, Loss: 0.005
+INFO:root:Epoch 169/400, Loss: 0.011
+INFO:root:Epoch 170/400, Loss: 0.016
+INFO:root:Train: MRR: 0.839, Hits@1: 0.717, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.693, Hits@1: 0.500, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.627, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 171/400, Loss: 0.005
+INFO:root:Epoch 172/400, Loss: 0.008
+INFO:root:Epoch 173/400, Loss: 0.016
+INFO:root:Epoch 174/400, Loss: 0.003
+INFO:root:Epoch 175/400, Loss: 0.014
+INFO:root:Epoch 176/400, Loss: 0.023
+INFO:root:Epoch 177/400, Loss: 0.014
+INFO:root:Epoch 178/400, Loss: 0.003
+INFO:root:Epoch 179/400, Loss: 0.013
+INFO:root:Epoch 180/400, Loss: 0.013
+INFO:root:Train: MRR: 0.839, Hits@1: 0.717, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.685, Hits@1: 0.500, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.627, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 181/400, Loss: 0.007
+INFO:root:Epoch 182/400, Loss: 0.007
+INFO:root:Epoch 183/400, Loss: 0.011
+INFO:root:Epoch 184/400, Loss: 0.008
+INFO:root:Epoch 185/400, Loss: 0.012
+INFO:root:Epoch 186/400, Loss: 0.006
+INFO:root:Epoch 187/400, Loss: 0.014
+INFO:root:Epoch 188/400, Loss: 0.005
+INFO:root:Epoch 189/400, Loss: 0.012
+INFO:root:Epoch 190/400, Loss: 0.005
+INFO:root:Train: MRR: 0.839, Hits@1: 0.717, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.693, Hits@1: 0.500, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.625, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 191/400, Loss: 0.003
+INFO:root:Epoch 192/400, Loss: 0.005
+INFO:root:Epoch 193/400, Loss: 0.006
+INFO:root:Epoch 194/400, Loss: 0.022
+INFO:root:Epoch 195/400, Loss: 0.004
+INFO:root:Epoch 196/400, Loss: 0.012
+INFO:root:Epoch 197/400, Loss: 0.006
+INFO:root:Epoch 198/400, Loss: 0.004
+INFO:root:Epoch 199/400, Loss: 0.012
+INFO:root:Epoch 200/400, Loss: 0.005
+INFO:root:Train: MRR: 0.828, Hits@1: 0.700, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.685, Hits@1: 0.500, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.625, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 201/400, Loss: 0.014
+INFO:root:Epoch 202/400, Loss: 0.010
+INFO:root:Epoch 203/400, Loss: 0.004
+INFO:root:Epoch 204/400, Loss: 0.008
+INFO:root:Epoch 205/400, Loss: 0.003
+INFO:root:Epoch 206/400, Loss: 0.009
+INFO:root:Epoch 207/400, Loss: 0.011
+INFO:root:Epoch 208/400, Loss: 0.009
+INFO:root:Epoch 209/400, Loss: 0.003
+INFO:root:Epoch 210/400, Loss: 0.023
+INFO:root:Train: MRR: 0.839, Hits@1: 0.717, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.693, Hits@1: 0.500, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.624, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 211/400, Loss: 0.022
+INFO:root:Epoch 212/400, Loss: 0.013
+INFO:root:Epoch 213/400, Loss: 0.022
+INFO:root:Epoch 214/400, Loss: 0.012
+INFO:root:Epoch 215/400, Loss: 0.011
+INFO:root:Epoch 216/400, Loss: 0.007
+INFO:root:Epoch 217/400, Loss: 0.005
+INFO:root:Epoch 218/400, Loss: 0.003
+INFO:root:Epoch 219/400, Loss: 0.004
+INFO:root:Epoch 220/400, Loss: 0.023
+INFO:root:Train: MRR: 0.839, Hits@1: 0.717, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.693, Hits@1: 0.500, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.624, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 221/400, Loss: 0.018
+INFO:root:Epoch 222/400, Loss: 0.013
+INFO:root:Epoch 223/400, Loss: 0.004
+INFO:root:Epoch 224/400, Loss: 0.002
+INFO:root:Epoch 225/400, Loss: 0.022
+INFO:root:Epoch 226/400, Loss: 0.012
+INFO:root:Epoch 227/400, Loss: 0.013
+INFO:root:Epoch 228/400, Loss: 0.013
+INFO:root:Epoch 229/400, Loss: 0.002
+INFO:root:Epoch 230/400, Loss: 0.046
+INFO:root:Train: MRR: 0.838, Hits@1: 0.717, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.683, Hits@1: 0.500, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.632, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 231/400, Loss: 0.022
+INFO:root:Epoch 232/400, Loss: 0.010
+INFO:root:Epoch 233/400, Loss: 0.002
+INFO:root:Epoch 234/400, Loss: 0.022
+INFO:root:Epoch 235/400, Loss: 0.012
+INFO:root:Epoch 236/400, Loss: 0.008
+INFO:root:Epoch 237/400, Loss: 0.009
+INFO:root:Epoch 238/400, Loss: 0.010
+INFO:root:Epoch 239/400, Loss: 0.005
+INFO:root:Epoch 240/400, Loss: 0.011
+INFO:root:Train: MRR: 0.841, Hits@1: 0.717, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.683, Hits@1: 0.500, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.632, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 241/400, Loss: 0.003
+INFO:root:Epoch 242/400, Loss: 0.013
+INFO:root:Epoch 243/400, Loss: 0.015
+INFO:root:Epoch 244/400, Loss: 0.022
+INFO:root:Epoch 245/400, Loss: 0.005
+INFO:root:Epoch 246/400, Loss: 0.001
+INFO:root:Epoch 247/400, Loss: 0.008
+INFO:root:Epoch 248/400, Loss: 0.007
+INFO:root:Epoch 249/400, Loss: 0.006
+INFO:root:Epoch 250/400, Loss: 0.013
+INFO:root:Train: MRR: 0.841, Hits@1: 0.717, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.683, Hits@1: 0.500, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.645, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 251/400, Loss: 0.013
+INFO:root:Epoch 252/400, Loss: 0.006
+INFO:root:Epoch 253/400, Loss: 0.008
+INFO:root:Epoch 254/400, Loss: 0.001
+INFO:root:Epoch 255/400, Loss: 0.013
+INFO:root:Epoch 256/400, Loss: 0.004
+INFO:root:Epoch 257/400, Loss: 0.004
+INFO:root:Epoch 258/400, Loss: 0.022
+INFO:root:Epoch 259/400, Loss: 0.021
+INFO:root:Epoch 260/400, Loss: 0.011
+INFO:root:Train: MRR: 0.858, Hits@1: 0.750, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.717, Hits@1: 0.550, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.636, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 261/400, Loss: 0.006
+INFO:root:Epoch 262/400, Loss: 0.006
+INFO:root:Epoch 263/400, Loss: 0.012
+INFO:root:Epoch 264/400, Loss: 0.022
+INFO:root:Epoch 265/400, Loss: 0.002
+INFO:root:Epoch 266/400, Loss: 0.022
+INFO:root:Epoch 267/400, Loss: 0.004
+INFO:root:Epoch 268/400, Loss: 0.008
+INFO:root:Epoch 269/400, Loss: 0.005
+INFO:root:Epoch 270/400, Loss: 0.006
+INFO:root:Train: MRR: 0.868, Hits@1: 0.767, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.717, Hits@1: 0.550, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.632, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 271/400, Loss: 0.013
+INFO:root:Epoch 272/400, Loss: 0.012
+INFO:root:Epoch 273/400, Loss: 0.013
+INFO:root:Epoch 274/400, Loss: 0.012
+INFO:root:Epoch 275/400, Loss: 0.022
+INFO:root:Epoch 276/400, Loss: 0.012
+INFO:root:Epoch 277/400, Loss: 0.003
+INFO:root:Epoch 278/400, Loss: 0.023
+INFO:root:Epoch 279/400, Loss: 0.012
+INFO:root:Epoch 280/400, Loss: 0.009
+INFO:root:Train: MRR: 0.868, Hits@1: 0.767, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.717, Hits@1: 0.550, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.615, Hits@1: 0.350, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 281/400, Loss: 0.013
+INFO:root:Epoch 282/400, Loss: 0.006
+INFO:root:Epoch 283/400, Loss: 0.005
+INFO:root:Epoch 284/400, Loss: 0.040
+INFO:root:Epoch 285/400, Loss: 0.007
+INFO:root:Epoch 286/400, Loss: 0.012
+INFO:root:Epoch 287/400, Loss: 0.007
+INFO:root:Epoch 288/400, Loss: 0.013
+INFO:root:Epoch 289/400, Loss: 0.005
+INFO:root:Epoch 290/400, Loss: 0.012
+INFO:root:Train: MRR: 0.868, Hits@1: 0.767, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.717, Hits@1: 0.550, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.640, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 291/400, Loss: 0.002
+INFO:root:Epoch 292/400, Loss: 0.013
+INFO:root:Epoch 293/400, Loss: 0.040
+INFO:root:Epoch 294/400, Loss: 0.013
+INFO:root:Epoch 295/400, Loss: 0.013
+INFO:root:Epoch 296/400, Loss: 0.004
+INFO:root:Epoch 297/400, Loss: 0.005
+INFO:root:Epoch 298/400, Loss: 0.002
+INFO:root:Epoch 299/400, Loss: 0.012
+INFO:root:Epoch 300/400, Loss: 0.008
+INFO:root:Train: MRR: 0.868, Hits@1: 0.767, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.707, Hits@1: 0.550, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.615, Hits@1: 0.350, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 301/400, Loss: 0.013
+INFO:root:Epoch 302/400, Loss: 0.041
+INFO:root:Epoch 303/400, Loss: 0.012
+INFO:root:Epoch 304/400, Loss: 0.004
+INFO:root:Epoch 305/400, Loss: 0.002
+INFO:root:Epoch 306/400, Loss: 0.012
+INFO:root:Epoch 307/400, Loss: 0.012
+INFO:root:Epoch 308/400, Loss: 0.006
+INFO:root:Epoch 309/400, Loss: 0.003
+INFO:root:Epoch 310/400, Loss: 0.012
+INFO:root:Train: MRR: 0.868, Hits@1: 0.767, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.705, Hits@1: 0.550, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.615, Hits@1: 0.350, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 311/400, Loss: 0.013
+INFO:root:Epoch 312/400, Loss: 0.022
+INFO:root:Epoch 313/400, Loss: 0.008
+INFO:root:Epoch 314/400, Loss: 0.003
+INFO:root:Epoch 315/400, Loss: 0.004
+INFO:root:Epoch 316/400, Loss: 0.008
+INFO:root:Epoch 317/400, Loss: 0.009
+INFO:root:Epoch 318/400, Loss: 0.002
+INFO:root:Epoch 319/400, Loss: 0.028
+INFO:root:Epoch 320/400, Loss: 0.009
+INFO:root:Train: MRR: 0.857, Hits@1: 0.750, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.704, Hits@1: 0.550, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Test: MRR: 0.665, Hits@1: 0.450, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 321/400, Loss: 0.007
+INFO:root:Epoch 322/400, Loss: 0.006
+INFO:root:Epoch 323/400, Loss: 0.009
+INFO:root:Epoch 324/400, Loss: 0.006
+INFO:root:Epoch 325/400, Loss: 0.012
+INFO:root:Epoch 326/400, Loss: 0.010
+INFO:root:Epoch 327/400, Loss: 0.013
+INFO:root:Epoch 328/400, Loss: 0.004
+INFO:root:Epoch 329/400, Loss: 0.003
+INFO:root:Epoch 330/400, Loss: 0.023
+INFO:root:Train: MRR: 0.868, Hits@1: 0.767, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.700, Hits@1: 0.550, Hits@10: 0.950, Hits@100: 1.000
+INFO:root:Test: MRR: 0.640, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 331/400, Loss: 0.006
+INFO:root:Epoch 332/400, Loss: 0.023
+INFO:root:Epoch 333/400, Loss: 0.008
+INFO:root:Epoch 334/400, Loss: 0.012
+INFO:root:Epoch 335/400, Loss: 0.012
+INFO:root:Epoch 336/400, Loss: 0.011
+INFO:root:Epoch 337/400, Loss: 0.012
+INFO:root:Epoch 338/400, Loss: 0.039
+INFO:root:Epoch 339/400, Loss: 0.003
+INFO:root:Epoch 340/400, Loss: 0.023
+INFO:root:Train: MRR: 0.865, Hits@1: 0.767, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.700, Hits@1: 0.550, Hits@10: 0.950, Hits@100: 1.000
+INFO:root:Test: MRR: 0.640, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 341/400, Loss: 0.025
+INFO:root:Epoch 342/400, Loss: 0.006
+INFO:root:Epoch 343/400, Loss: 0.023
+INFO:root:Epoch 344/400, Loss: 0.006
+INFO:root:Epoch 345/400, Loss: 0.010
+INFO:root:Epoch 346/400, Loss: 0.003
+INFO:root:Epoch 347/400, Loss: 0.005
+INFO:root:Epoch 348/400, Loss: 0.006
+INFO:root:Epoch 349/400, Loss: 0.011
+INFO:root:Epoch 350/400, Loss: 0.003
+INFO:root:Train: MRR: 0.850, Hits@1: 0.733, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.675, Hits@1: 0.500, Hits@10: 0.950, Hits@100: 1.000
+INFO:root:Test: MRR: 0.665, Hits@1: 0.450, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 351/400, Loss: 0.005
+INFO:root:Epoch 352/400, Loss: 0.002
+INFO:root:Epoch 353/400, Loss: 0.013
+INFO:root:Epoch 354/400, Loss: 0.006
+INFO:root:Epoch 355/400, Loss: 0.005
+INFO:root:Epoch 356/400, Loss: 0.004
+INFO:root:Epoch 357/400, Loss: 0.013
+INFO:root:Epoch 358/400, Loss: 0.006
+INFO:root:Epoch 359/400, Loss: 0.021
+INFO:root:Epoch 360/400, Loss: 0.007
+INFO:root:Train: MRR: 0.873, Hits@1: 0.783, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.707, Hits@1: 0.550, Hits@10: 0.950, Hits@100: 1.000
+INFO:root:Test: MRR: 0.678, Hits@1: 0.450, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 361/400, Loss: 0.006
+INFO:root:Epoch 362/400, Loss: 0.004
+INFO:root:Epoch 363/400, Loss: 0.012
+INFO:root:Epoch 364/400, Loss: 0.006
+INFO:root:Epoch 365/400, Loss: 0.003
+INFO:root:Epoch 366/400, Loss: 0.010
+INFO:root:Epoch 367/400, Loss: 0.008
+INFO:root:Epoch 368/400, Loss: 0.013
+INFO:root:Epoch 369/400, Loss: 0.008
+INFO:root:Epoch 370/400, Loss: 0.007
+INFO:root:Train: MRR: 0.865, Hits@1: 0.767, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.698, Hits@1: 0.550, Hits@10: 0.950, Hits@100: 1.000
+INFO:root:Test: MRR: 0.678, Hits@1: 0.450, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 371/400, Loss: 0.005
+INFO:root:Epoch 372/400, Loss: 0.026
+INFO:root:Epoch 373/400, Loss: 0.009
+INFO:root:Epoch 374/400, Loss: 0.005
+INFO:root:Epoch 375/400, Loss: 0.006
+INFO:root:Epoch 376/400, Loss: 0.004
+INFO:root:Epoch 377/400, Loss: 0.005
+INFO:root:Epoch 378/400, Loss: 0.002
+INFO:root:Epoch 379/400, Loss: 0.011
+INFO:root:Epoch 380/400, Loss: 0.026
+INFO:root:Train: MRR: 0.865, Hits@1: 0.767, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.698, Hits@1: 0.550, Hits@10: 0.950, Hits@100: 1.000
+INFO:root:Test: MRR: 0.678, Hits@1: 0.450, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 381/400, Loss: 0.008
+INFO:root:Epoch 382/400, Loss: 0.005
+INFO:root:Epoch 383/400, Loss: 0.003
+INFO:root:Epoch 384/400, Loss: 0.011
+INFO:root:Epoch 385/400, Loss: 0.003
+INFO:root:Epoch 386/400, Loss: 0.012
+INFO:root:Epoch 387/400, Loss: 0.010
+INFO:root:Epoch 388/400, Loss: 0.021
+INFO:root:Epoch 389/400, Loss: 0.022
+INFO:root:Epoch 390/400, Loss: 0.005
+INFO:root:Train: MRR: 0.865, Hits@1: 0.767, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.698, Hits@1: 0.550, Hits@10: 0.950, Hits@100: 0.950
+INFO:root:Test: MRR: 0.703, Hits@1: 0.500, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Epoch 391/400, Loss: 0.005
+INFO:root:Epoch 392/400, Loss: 0.003
+INFO:root:Epoch 393/400, Loss: 0.002
+INFO:root:Epoch 394/400, Loss: 0.011
+INFO:root:Epoch 395/400, Loss: 0.006
+INFO:root:Epoch 396/400, Loss: 0.007
+INFO:root:Epoch 397/400, Loss: 0.009
+INFO:root:Epoch 398/400, Loss: 0.004
+INFO:root:Epoch 399/400, Loss: 0.012
+INFO:root:Epoch 400/400, Loss: 0.002
+INFO:root:Train: MRR: 0.865, Hits@1: 0.767, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.697, Hits@1: 0.550, Hits@10: 0.950, Hits@100: 0.950
+INFO:root:Test: MRR: 0.678, Hits@1: 0.450, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:Final Result:
+INFO:root:MRR: 0.636, Hits@1: 0.400, Hits@10: 1.000, Hits@100: 1.000
+INFO:root:******************* Training Finished *******************

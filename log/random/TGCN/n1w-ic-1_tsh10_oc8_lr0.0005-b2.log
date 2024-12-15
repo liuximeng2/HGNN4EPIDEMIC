@@ -1,0 +1,11 @@
+INFO:root:Namespace(batch_size=2, dataset='random', dropout=0.2, epoch=100, hidden_size=256, lr=0.0005, mlp_layer=3, model='TGCN', out_channels=8, punishment=10, seed=0, struc='graph', temporal_layer=3, timestep_hidden=10)
+INFO:root:******************* Training Started *******************
+INFO:root:Namespace(batch_size=2, dataset='random', dropout=0.2, epoch=100, hidden_size=256, lr=0.0005, mlp_layer=3, model='TGCN', out_channels=8, punishment=10, seed=0, struc='graph', temporal_layer=3, timestep_hidden=10)
+INFO:root:******************* Training Started *******************
+INFO:root:Epoch 0/100, Loss: 3.4467
+INFO:root:Train: MRR: 0.0010, Hits@1: 0.0000, Hits@10: 0.0000, Hits@100: 0.0200
+INFO:root:Valid: MRR: 0.0012, Hits@1: 0.0000, Hits@10: 0.0000, Hits@100: 0.0500
+INFO:root:Namespace(batch_size=2, dataset='random', dropout=0.2, epoch=100, hidden_size=256, lr=0.0005, mlp_layer=3, model='TGCN', out_channels=8, punishment=10, seed=0, struc='graph', temporal_layer=3, timestep_hidden=10)
+INFO:root:******************* Training Started *******************
+INFO:root:Epoch 0/100, Loss: 3.4466
+INFO:root:Train: MRR: 0.0010, Hits@1: 0.0000, Hits@10: 0.0000, Hits@100: 0.0200

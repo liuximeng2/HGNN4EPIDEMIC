@@ -1,0 +1,171 @@
+INFO:root:Namespace(batch_size=1, dataset='h2abm', dropout=0.2, epoch=100, hidden_size=512, lr=0.001, mlp_layer=2, model='THGNN', out_channels=8, punishment=5, seed=0, struc='hgraph', temporal_layer=2, timestep_hidden=5)
+INFO:root:******************* Training Started *******************
+INFO:root:Namespace(batch_size=1, dataset='h2abm', dropout=0.2, epoch=100, hidden_size=512, lr=0.001, mlp_layer=2, model='THGNN', out_channels=8, punishment=5, seed=0, spatial_layer=1, struc='hgraph', temporal_layer=2, timestep_hidden=5)
+INFO:root:******************* Training Started *******************
+INFO:root:Epoch 0/100, Loss: 1.527
+INFO:root:Train: MRR: 0.082, Hits@1: 0.05, Hits@10: 0.133, Hits@100: 0.333
+INFO:root:Valid: MRR: 0.032, Hits@1: 0.000, Hits@10: 0.100, Hits@100: 0.300
+INFO:root:Test: MRR: 0.042, Hits@1: 0.000, Hits@10: 0.050, Hits@100: 0.400
+INFO:root:Epoch 1/100, Loss: 2.888
+INFO:root:Epoch 2/100, Loss: 1.043
+INFO:root:Epoch 3/100, Loss: 1.006
+INFO:root:Epoch 4/100, Loss: 0.789
+INFO:root:Epoch 5/100, Loss: 1.901
+INFO:root:Train: MRR: 0.082, Hits@1: 0.05, Hits@10: 0.133, Hits@100: 0.333
+INFO:root:Valid: MRR: 0.032, Hits@1: 0.000, Hits@10: 0.100, Hits@100: 0.300
+INFO:root:Test: MRR: 0.042, Hits@1: 0.000, Hits@10: 0.050, Hits@100: 0.400
+INFO:root:Epoch 6/100, Loss: 1.117
+INFO:root:Epoch 7/100, Loss: 1.259
+INFO:root:Epoch 8/100, Loss: 1.366
+INFO:root:Epoch 9/100, Loss: 1.319
+INFO:root:Epoch 10/100, Loss: 2.196
+INFO:root:Train: MRR: 0.082, Hits@1: 0.05, Hits@10: 0.133, Hits@100: 0.333
+INFO:root:Valid: MRR: 0.032, Hits@1: 0.000, Hits@10: 0.100, Hits@100: 0.300
+INFO:root:Test: MRR: 0.042, Hits@1: 0.000, Hits@10: 0.050, Hits@100: 0.400
+INFO:root:Epoch 11/100, Loss: 2.146
+INFO:root:Epoch 12/100, Loss: 1.801
+INFO:root:Epoch 13/100, Loss: 2.293
+INFO:root:Epoch 14/100, Loss: 1.293
+INFO:root:Epoch 15/100, Loss: 0.695
+INFO:root:Train: MRR: 0.085, Hits@1: 0.05, Hits@10: 0.133, Hits@100: 0.367
+INFO:root:Valid: MRR: 0.034, Hits@1: 0.000, Hits@10: 0.100, Hits@100: 0.350
+INFO:root:Test: MRR: 0.045, Hits@1: 0.000, Hits@10: 0.100, Hits@100: 0.400
+INFO:root:Epoch 16/100, Loss: 1.263
+INFO:root:Epoch 17/100, Loss: 1.484
+INFO:root:Epoch 18/100, Loss: 1.224
+INFO:root:Epoch 19/100, Loss: 23.562
+INFO:root:Epoch 20/100, Loss: 2.127
+INFO:root:Train: MRR: 0.103, Hits@1: 0.05, Hits@10: 0.217, Hits@100: 0.633
+INFO:root:Valid: MRR: 0.062, Hits@1: 0.000, Hits@10: 0.150, Hits@100: 0.850
+INFO:root:Test: MRR: 0.061, Hits@1: 0.000, Hits@10: 0.100, Hits@100: 0.800
+INFO:root:Epoch 21/100, Loss: 1.649
+INFO:root:Epoch 22/100, Loss: 1.073
+INFO:root:Epoch 23/100, Loss: 0.560
+INFO:root:Epoch 24/100, Loss: 0.307
+INFO:root:Epoch 25/100, Loss: 1.063
+INFO:root:Train: MRR: 0.225, Hits@1: 0.12, Hits@10: 0.450, Hits@100: 0.767
+INFO:root:Valid: MRR: 0.106, Hits@1: 0.050, Hits@10: 0.150, Hits@100: 0.750
+INFO:root:Test: MRR: 0.190, Hits@1: 0.000, Hits@10: 0.500, Hits@100: 0.800
+INFO:root:Epoch 26/100, Loss: 0.664
+INFO:root:Epoch 27/100, Loss: 0.656
+INFO:root:Epoch 28/100, Loss: 2.100
+INFO:root:Epoch 29/100, Loss: 0.463
+INFO:root:Epoch 30/100, Loss: 20.237
+INFO:root:Train: MRR: 0.114, Hits@1: 0.10, Hits@10: 0.133, Hits@100: 0.300
+INFO:root:Valid: MRR: 0.015, Hits@1: 0.000, Hits@10: 0.050, Hits@100: 0.150
+INFO:root:Test: MRR: 0.075, Hits@1: 0.050, Hits@10: 0.150, Hits@100: 0.300
+INFO:root:Epoch 31/100, Loss: 0.249
+INFO:root:Epoch 32/100, Loss: 19.954
+INFO:root:Epoch 33/100, Loss: 0.204
+INFO:root:Epoch 34/100, Loss: 0.818
+INFO:root:Epoch 35/100, Loss: 0.466
+INFO:root:Train: MRR: 0.190, Hits@1: 0.07, Hits@10: 0.450, Hits@100: 0.850
+INFO:root:Valid: MRR: 0.124, Hits@1: 0.050, Hits@10: 0.250, Hits@100: 0.850
+INFO:root:Test: MRR: 0.154, Hits@1: 0.050, Hits@10: 0.500, Hits@100: 0.850
+INFO:root:Epoch 36/100, Loss: 0.433
+INFO:root:Epoch 37/100, Loss: 10.435
+INFO:root:Epoch 38/100, Loss: 0.384
+INFO:root:Epoch 39/100, Loss: 0.271
+INFO:root:Epoch 40/100, Loss: 0.959
+INFO:root:Train: MRR: 0.333, Hits@1: 0.23, Hits@10: 0.533, Hits@100: 0.717
+INFO:root:Valid: MRR: 0.292, Hits@1: 0.250, Hits@10: 0.450, Hits@100: 0.700
+INFO:root:Test: MRR: 0.405, Hits@1: 0.250, Hits@10: 0.600, Hits@100: 0.800
+INFO:root:Epoch 41/100, Loss: 0.338
+INFO:root:Epoch 42/100, Loss: 1.064
+INFO:root:Epoch 43/100, Loss: 0.190
+INFO:root:Epoch 44/100, Loss: 0.498
+INFO:root:Epoch 45/100, Loss: 0.285
+INFO:root:Train: MRR: 0.409, Hits@1: 0.30, Hits@10: 0.633, Hits@100: 0.800
+INFO:root:Valid: MRR: 0.337, Hits@1: 0.250, Hits@10: 0.500, Hits@100: 0.750
+INFO:root:Test: MRR: 0.518, Hits@1: 0.450, Hits@10: 0.600, Hits@100: 0.800
+INFO:root:Epoch 46/100, Loss: 0.611
+INFO:root:Epoch 47/100, Loss: 1.791
+INFO:root:Epoch 48/100, Loss: 1.909
+INFO:root:Epoch 49/100, Loss: 0.516
+INFO:root:Epoch 50/100, Loss: 1.342
+INFO:root:Train: MRR: 0.377, Hits@1: 0.23, Hits@10: 0.650, Hits@100: 0.850
+INFO:root:Valid: MRR: 0.361, Hits@1: 0.200, Hits@10: 0.700, Hits@100: 0.850
+INFO:root:Test: MRR: 0.363, Hits@1: 0.200, Hits@10: 0.750, Hits@100: 0.800
+INFO:root:Epoch 51/100, Loss: 0.458
+INFO:root:Epoch 52/100, Loss: 0.120
+INFO:root:Epoch 53/100, Loss: 2.306
+INFO:root:Epoch 54/100, Loss: 1.556
+INFO:root:Epoch 55/100, Loss: 11.927
+INFO:root:Train: MRR: 0.222, Hits@1: 0.07, Hits@10: 0.533, Hits@100: 0.950
+INFO:root:Valid: MRR: 0.221, Hits@1: 0.100, Hits@10: 0.450, Hits@100: 0.950
+INFO:root:Test: MRR: 0.177, Hits@1: 0.050, Hits@10: 0.450, Hits@100: 0.950
+INFO:root:Epoch 56/100, Loss: 4.702
+INFO:root:Epoch 57/100, Loss: 9.738
+INFO:root:Epoch 58/100, Loss: 0.743
+INFO:root:Epoch 59/100, Loss: 4.346
+INFO:root:Epoch 60/100, Loss: 0.788
+INFO:root:Train: MRR: 0.274, Hits@1: 0.15, Hits@10: 0.533, Hits@100: 0.950
+INFO:root:Valid: MRR: 0.215, Hits@1: 0.100, Hits@10: 0.450, Hits@100: 0.950
+INFO:root:Test: MRR: 0.202, Hits@1: 0.100, Hits@10: 0.450, Hits@100: 0.950
+INFO:root:Epoch 61/100, Loss: 0.415
+INFO:root:Epoch 62/100, Loss: 5.145
+INFO:root:Epoch 63/100, Loss: 20.970
+INFO:root:Epoch 64/100, Loss: 7.286
+INFO:root:Epoch 65/100, Loss: 0.174
+INFO:root:Train: MRR: 0.463, Hits@1: 0.32, Hits@10: 0.850, Hits@100: 0.917
+INFO:root:Valid: MRR: 0.440, Hits@1: 0.250, Hits@10: 0.850, Hits@100: 0.950
+INFO:root:Test: MRR: 0.395, Hits@1: 0.250, Hits@10: 0.800, Hits@100: 0.900
+INFO:root:Epoch 66/100, Loss: 0.554
+INFO:root:Epoch 67/100, Loss: 1.392
+INFO:root:Epoch 68/100, Loss: 0.236
+INFO:root:Epoch 69/100, Loss: 5.498
+INFO:root:Epoch 70/100, Loss: 1.467
+INFO:root:Train: MRR: 0.460, Hits@1: 0.28, Hits@10: 0.817, Hits@100: 0.933
+INFO:root:Valid: MRR: 0.531, Hits@1: 0.350, Hits@10: 0.850, Hits@100: 0.950
+INFO:root:Test: MRR: 0.395, Hits@1: 0.250, Hits@10: 0.800, Hits@100: 0.900
+INFO:root:Epoch 71/100, Loss: 1.238
+INFO:root:Epoch 72/100, Loss: 0.120
+INFO:root:Epoch 73/100, Loss: 0.512
+INFO:root:Epoch 74/100, Loss: 0.924
+INFO:root:Epoch 75/100, Loss: 0.286
+INFO:root:Train: MRR: 0.405, Hits@1: 0.23, Hits@10: 0.717, Hits@100: 0.967
+INFO:root:Valid: MRR: 0.258, Hits@1: 0.100, Hits@10: 0.500, Hits@100: 0.950
+INFO:root:Test: MRR: 0.274, Hits@1: 0.150, Hits@10: 0.600, Hits@100: 0.950
+INFO:root:Epoch 76/100, Loss: 0.962
+INFO:root:Epoch 77/100, Loss: 1.603
+INFO:root:Epoch 78/100, Loss: 0.676
+INFO:root:Epoch 79/100, Loss: 0.990
+INFO:root:Epoch 80/100, Loss: 5.366
+INFO:root:Train: MRR: 0.444, Hits@1: 0.30, Hits@10: 0.767, Hits@100: 0.967
+INFO:root:Valid: MRR: 0.264, Hits@1: 0.050, Hits@10: 0.750, Hits@100: 0.950
+INFO:root:Test: MRR: 0.320, Hits@1: 0.200, Hits@10: 0.700, Hits@100: 0.950
+INFO:root:Epoch 81/100, Loss: 0.712
+INFO:root:Epoch 82/100, Loss: 0.059
+INFO:root:Epoch 83/100, Loss: 0.147
+INFO:root:Epoch 84/100, Loss: 0.160
+INFO:root:Epoch 85/100, Loss: 0.385
+INFO:root:Train: MRR: 0.509, Hits@1: 0.42, Hits@10: 0.750, Hits@100: 0.983
+INFO:root:Valid: MRR: 0.516, Hits@1: 0.350, Hits@10: 0.800, Hits@100: 1.000
+INFO:root:Test: MRR: 0.427, Hits@1: 0.300, Hits@10: 0.700, Hits@100: 0.950
+INFO:root:Epoch 86/100, Loss: 0.040
+INFO:root:Epoch 87/100, Loss: 0.663
+INFO:root:Epoch 88/100, Loss: 0.114
+INFO:root:Epoch 89/100, Loss: 0.293
+INFO:root:Epoch 90/100, Loss: 6.708
+INFO:root:Train: MRR: 0.517, Hits@1: 0.38, Hits@10: 0.767, Hits@100: 0.967
+INFO:root:Valid: MRR: 0.583, Hits@1: 0.450, Hits@10: 0.800, Hits@100: 0.950
+INFO:root:Test: MRR: 0.529, Hits@1: 0.400, Hits@10: 0.750, Hits@100: 0.950
+INFO:root:Epoch 91/100, Loss: 1.438
+INFO:root:Epoch 92/100, Loss: 1.609
+INFO:root:Epoch 93/100, Loss: 4.747
+INFO:root:Epoch 94/100, Loss: 0.556
+INFO:root:Epoch 95/100, Loss: 0.100
+INFO:root:Train: MRR: 0.541, Hits@1: 0.42, Hits@10: 0.767, Hits@100: 1.000
+INFO:root:Valid: MRR: 0.432, Hits@1: 0.200, Hits@10: 0.800, Hits@100: 1.000
+INFO:root:Test: MRR: 0.372, Hits@1: 0.250, Hits@10: 0.900, Hits@100: 0.950
+INFO:root:Epoch 96/100, Loss: 0.609
+INFO:root:Epoch 97/100, Loss: 0.140
+INFO:root:Epoch 98/100, Loss: 0.470
+INFO:root:Epoch 99/100, Loss: 0.912
+INFO:root:Epoch 100/100, Loss: 1.481
+INFO:root:Train: MRR: 0.188, Hits@1: 0.10, Hits@10: 0.283, Hits@100: 0.817
+INFO:root:Valid: MRR: 0.176, Hits@1: 0.100, Hits@10: 0.300, Hits@100: 0.950
+INFO:root:Test: MRR: 0.136, Hits@1: 0.050, Hits@10: 0.300, Hits@100: 0.800
+INFO:root:Final Result:
+INFO:root:MRR: 0.530, Hits@1: 0.351, Hits@10: 0.852, Hits@100: 0.950
+INFO:root:******************* Training Finished *******************
