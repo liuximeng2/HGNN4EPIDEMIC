@@ -20,17 +20,28 @@ def train(model, train_loader, valid_loader, test_loader, optimizer, num_epochs,
         flag = True
         for sample in train_loader:
             sim_states, patient_zero = sample['sim_states'].to(device), sample['patient_zero'].to(device)
+
+            # print(f"patient_zero type: {type(patient_zero)}")
+            # print(f"patient_zero shape: {patient_zero.shape}")
+            # print(f"data type of patient_zero: {patient_zero.dtype}")
             
             for i in range(len(sample['dynamic_edge_list'])):
                 sample['dynamic_edge_list'][i] = sample['dynamic_edge_list'][i][0].to(device)
             dynamic_edge_list = sample['dynamic_edge_list']
 
+            # print(type(dynamic_edge_list))
+            # print(f"length of the dynamic list: {len(dynamic_edge_list)}")
+            # print(f"type of the first element: {type(dynamic_edge_list[0])}")
+            # print(f"shape of the first element: {dynamic_edge_list[0].shape}")
+
             optimizer.zero_grad()
             output = model(sim_states, dynamic_edge_list)
+            # print(f"output shape: {output.shape}") [batch_size. num_nodes, 1]
 
             target = torch.zeros_like(output)
             for i in range(args.batch_size):
                 target[i, patient_zero[i]] = 1
+
 
             num_positive = target.sum()
             num_negative = target.numel() - num_positive
@@ -97,8 +108,7 @@ def evaluate_model(model, data_loader, device):
             for i in range(batch_size):
                 output_scores = output[i].squeeze(dim=1)  # Shape: [num_nodes]
                 true_index = patient_zero[i]  # Scalar
-                print(f"output_scores shape: {output_scores.shape}, true_index shape: {true_index.shape}")
-                os.exit(0)
+                # print(f"output_scores shape: {output_scores.shape}, true_index shape: {true_index.shape}")
 
                 # Sort the scores in descending order
                 _, indices = torch.sort(output_scores, descending=True)
@@ -121,6 +131,7 @@ def evaluate_model(model, data_loader, device):
     return mrr, hits_at_1, hits_at_10, hits_at_100
 
 
+
 def main():
     """
     Main file to run from the command line.
@@ -134,10 +145,9 @@ def main():
     parser.add_argument("--device", type=str, default='cuda')
     parser.add_argument("--dataset", type=str, default='UVA')
     parser.add_argument("--model", type=str, default='DTHGNN', choices=model_dict.keys())
-    parser.add_argument("--struct", type=str, default='RNN-GNN')
     parser.add_argument("--timestep_hidden", type=int, default=20)
     parser.add_argument("--known_interval", type=int, default=10)
-    parser.add_argument("--pred_interval", type=int, default=10)
+    parser.add_argument("--pred_interval", type=int, default=1)
 
     args, _ = parser.parse_known_args()
     model_name = args.model
@@ -145,13 +155,13 @@ def main():
     model_args = model_dict[model_name]['default_args']
     for arg, default in model_args.items():
         parser.add_argument(f"--{arg}", type=type(default), default=default)
-
+    
     parser.add_argument("--agg", action="store_true")
     parser.add_argument("--partial", action="store_true")
     args = parser.parse_args()
 
     set_seed(args.seed)
-    log_path = f'./log/UVA/{args.model}'
+    log_path = f'./log/{args.dataset}/{args.model}/detect'
     init_path(log_path)
     log_path += f'/tsh{args.timestep_hidden}-lr{args.lr}-b{args.batch_size}-drop{args.dropout}'
     log_path += f'-agg' if args.agg else ''
@@ -162,33 +172,55 @@ def main():
     logging.info(args)
 
     device = torch.device(args.device if torch.cuda.is_available() else 'cpu')
-    if args.agg == True:
-        logging.info('Aggregated Hypergraph')
-        data = torch.load('data/sim#0/DynamicSim_uva_ic1_pathogen_aggH.pt')
-    if args.agg == False:
-        logging.info('Sparse Hypergraph')
-        data = torch.load('data/sim#0/DynamicSim_uva_ic1_pathogen.pt')
+    interested_interval = args.timestep_hidden + args.known_interval
+    if args.dataset == 'UVA':
+        if args.agg == True:
+            logging.info('Aggregated Hypergraph')
+            data = torch.load('data/sim#0/DynamicSim_uva_ic1_pathogen_aggH.pt')
+        if args.agg == False:
+            logging.info('Sparse Hypergraph')
+            data = torch.load('data/sim#0/DynamicSim_uva_ic1_pathogen.pt')
+        data.forecast_label = data.sim_states[:, interested_interval:interested_interval + args.pred_interval, :, 1]
+        data.dynamic_hypergraph = data.dynamic_hypergraph[0:interested_interval, :, :]
+        data.dynamic_edge_list = process_hyperedges_incidence(data.dynamic_hypergraph, interested_interval)
+        horizon = data.hyperparameters['horizon']
+        assert data is not None, 'Data not found'
+    
+    if args.dataset == 'EpiSim':
+        data = torch.load("data/epiSim/simulated_epi.pt")
+        data.sim_states = data.sim_states.float()
+        data.patient_zero = torch.unsqueeze(data.patient_zero, 1).to(dtype=torch.int64)
+        data.dynamic_hypergraph = data.dynamic_hypergraph.float()
+        horizon = data.sim_states.shape[1]
+        pre_symptom = data.sim_states[:, interested_interval:interested_interval + args.pred_interval, :, 1]
+        symptom = data.sim_states[:, interested_interval:interested_interval + args.pred_interval, :, 2]
+        critical = data.sim_states[:, interested_interval:interested_interval + args.pred_interval, :, 3]
+        #combine the three states into one using OR operation
+        data.forecast_label = torch.logical_or(torch.logical_or(pre_symptom, symptom), critical)
+        data.dynamic_hypergraph = data.dynamic_hypergraph[:, 0:interested_interval, :, :]
+        data.dynamic_edge_list = process_hyperedges_incidence(data.dynamic_hypergraph, interested_interval, multiple_instance=True)
+        args.in_channels = 10
+        
+    print(data)
 
-    horizon = data.hyperparameters['horizon']
-    assert data is not None, 'Data not found'
     assert horizon > args.timestep_hidden, 'Horizon should be greater than timestep_hidden'
 
     data.sim_states[:, 0:args.timestep_hidden, :, :] = 0 # mask the first timestep_hidden timesteps
-    args.len_input = horizon
 
-    interested_interval = args.timestep_hidden + args.known_interval
-    data.forecast_label = data.sim_states[:, interested_interval:interested_interval + args.pred_interval, :, 1]
     data.sim_states = data.sim_states[:, 0:interested_interval, :, :]
-    data.dynamic_hypergraph = data.dynamic_hypergraph[0:interested_interval, :, :]
-    data.dynamic_edge_list = process_hyperedges_incidence(data.dynamic_hypergraph, interested_interval)
     args.len_input = interested_interval
+    args.num_for_predict = 1 # for source detection
+
 
     if args.model == 'ASTGCN' or args.model == 'MSTGCN':
         data.sim_states = data.sim_states.permute(0, 2 ,3 ,1)
 
-    train_data, valid_data, test_data = split_dataset(data, seed=args.seed)
-
-    train_data, valid_data, test_data = DynamicHypergraphDataset(train_data), DynamicHypergraphDataset(valid_data), DynamicHypergraphDataset(test_data)
+    if args.dataset == 'UVA':
+        train_data, valid_data, test_data = split_dataset(data, seed=args.seed)
+        train_data, valid_data, test_data = DynamicHypergraphDataset(train_data), DynamicHypergraphDataset(valid_data), DynamicHypergraphDataset(test_data)
+    if args.dataset == 'EpiSim':
+        train_data, valid_data, test_data = split_dataset(data, seed=args.seed, is_multiple_instance=True)
+        train_data, valid_data, test_data = DynamicHypergraphDataset(train_data, multiple_instance=True), DynamicHypergraphDataset(valid_data, multiple_instance=True), DynamicHypergraphDataset(test_data, multiple_instance=True)
     train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True)
     valid_loader = DataLoader(valid_data, batch_size=args.batch_size, shuffle=False)
     test_loader = DataLoader(test_data, batch_size=args.batch_size, shuffle=False)
@@ -204,3 +236,89 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+# def main():
+#     """
+#     Main file to run from the command line.
+#     """
+
+#     from config import model_dict
+#     import datetime
+#     now = datetime.datetime.now()
+
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument("--device", type=str, default='cuda')
+#     parser.add_argument("--dataset", type=str, default='UVA')
+#     parser.add_argument("--model", type=str, default='DTHGNN', choices=model_dict.keys())
+#     parser.add_argument("--struct", type=str, default='RNN-GNN')
+#     parser.add_argument("--timestep_hidden", type=int, default=20)
+#     parser.add_argument("--known_interval", type=int, default=10)
+#     parser.add_argument("--pred_interval", type=int, default=10)
+
+#     args, _ = parser.parse_known_args()
+#     model_name = args.model
+
+#     model_args = model_dict[model_name]['default_args']
+#     for arg, default in model_args.items():
+#         parser.add_argument(f"--{arg}", type=type(default), default=default)
+
+#     parser.add_argument("--agg", action="store_true")
+#     parser.add_argument("--partial", action="store_true")
+#     args = parser.parse_args()
+
+#     set_seed(args.seed)
+#     log_path = f'./log/UVA/{args.model}'
+#     init_path(log_path)
+#     log_path += f'/tsh{args.timestep_hidden}-lr{args.lr}-b{args.batch_size}-drop{args.dropout}'
+#     log_path += f'-agg' if args.agg else ''
+#     log_path += f'-partial' if args.partial else ''
+#     log_path += '.log'
+#     logging.basicConfig(filename=log_path, level=logging.INFO)
+#     logging.info(now)
+#     logging.info(args)
+
+#     device = torch.device(args.device if torch.cuda.is_available() else 'cpu')
+#     if args.agg == True:
+#         logging.info('Aggregated Hypergraph')
+#         data = torch.load('data/sim#0/DynamicSim_uva_ic1_pathogen_aggH.pt')
+#     if args.agg == False:
+#         logging.info('Sparse Hypergraph')
+#         data = torch.load('data/sim#0/DynamicSim_uva_ic1_pathogen.pt')
+
+#     horizon = data.hyperparameters['horizon']
+#     assert data is not None, 'Data not found'
+#     assert horizon > args.timestep_hidden, 'Horizon should be greater than timestep_hidden'
+
+#     data.sim_states[:, 0:args.timestep_hidden, :, :] = 0 # mask the first timestep_hidden timesteps
+#     args.len_input = horizon
+
+#     interested_interval = args.timestep_hidden + args.known_interval
+#     data.forecast_label = data.sim_states[:, interested_interval:interested_interval + args.pred_interval, :, 1]
+#     data.sim_states = data.sim_states[:, 0:interested_interval, :, :]
+#     data.dynamic_hypergraph = data.dynamic_hypergraph[0:interested_interval, :, :]
+#     data.dynamic_edge_list = process_hyperedges_incidence(data.dynamic_hypergraph, interested_interval)
+#     args.len_input = interested_interval
+
+#     if args.model == 'ASTGCN' or args.model == 'MSTGCN':
+#         data.sim_states = data.sim_states.permute(0, 2 ,3 ,1)
+
+#     train_data, valid_data, test_data = split_dataset(data, seed=args.seed)
+
+#     train_data, valid_data, test_data = DynamicHypergraphDataset(train_data), DynamicHypergraphDataset(valid_data), DynamicHypergraphDataset(test_data)
+#     train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True)
+#     valid_loader = DataLoader(valid_data, batch_size=args.batch_size, shuffle=False)
+#     test_loader = DataLoader(test_data, batch_size=args.batch_size, shuffle=False)
+
+#     model = model_dict[model_name]['class']
+#     model = model(args).to(device)
+
+#     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
+#     logging.info('******************* Training Started *******************')
+#     print('******************* Training Started *******************')
+#     train(model, train_loader, valid_loader, test_loader, optimizer, args.epochs, logging, device, args)
+#     logging.info('******************* Training Finished *******************')
+
+# if __name__ == "__main__":
+#     main()

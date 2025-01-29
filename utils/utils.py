@@ -17,7 +17,7 @@ def set_seed(seed):
     torch.cuda.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
 
-def split_dataset(data, train_ratio=0.6, valid_ratio=0.2, seed=0):
+def split_dataset(data, train_ratio=0.6, valid_ratio=0.2, seed=0, is_multiple_instance=False):
     """
     Splits the torch_geometric data object into train, validation, and test sets.
     
@@ -48,13 +48,16 @@ def split_dataset(data, train_ratio=0.6, valid_ratio=0.2, seed=0):
     train_mask[train_indices] = True
     valid_mask[valid_indices] = True
     test_mask[test_indices] = True
+
+    print(type(data.dynamic_edge_list))
     
     train_data = Data(
         sim_states=data.sim_states[train_mask],
         dynamic_hgraph=data.dynamic_hypergraph,
         patient_zero=data.patient_zero[train_mask],
         forecast_label=data.forecast_label[train_mask],
-        dynamic_edge_list=data.dynamic_edge_list,
+        dynamic_edge_list = [row for row, mask in zip(data.dynamic_edge_list, train_mask) if mask] if is_multiple_instance else data.dynamic_edge_list,
+        # dynamic_edge_list=data.dynamic_edge_list[list(train_mask)] if is_multiple_instance else data.dynamic_edge_list,
         train_mask=train_mask,
         val_mask=None,
         test_mask=None
@@ -64,8 +67,7 @@ def split_dataset(data, train_ratio=0.6, valid_ratio=0.2, seed=0):
         dynamic_hgraph=data.dynamic_hypergraph,
         patient_zero=data.patient_zero[valid_mask],
         forecast_label=data.forecast_label[valid_mask],
-        dynamic_edge_list=data.dynamic_edge_list,
-        train_mask=None,
+        dynamic_edge_list = [row for row, mask in zip(data.dynamic_edge_list, valid_mask) if mask] if is_multiple_instance else data.dynamic_edge_list,
         val_mask=valid_mask,
         test_mask=None
     )
@@ -74,7 +76,7 @@ def split_dataset(data, train_ratio=0.6, valid_ratio=0.2, seed=0):
         dynamic_hgraph=data.dynamic_hypergraph,
         patient_zero=data.patient_zero[test_mask],
         forecast_label=data.forecast_label[test_mask],        
-        dynamic_edge_list=data.dynamic_edge_list,
+        dynamic_edge_list = [row for row, mask in zip(data.dynamic_edge_list, test_mask) if mask] if is_multiple_instance else data.dynamic_edge_list,
         train_mask=None,
         val_mask=None,
         test_mask=test_mask

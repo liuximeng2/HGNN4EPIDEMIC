@@ -24,15 +24,23 @@ def train(model, train_loader, valid_loader, test_loader, optimizer, num_epochs,
         flag = True
         for sample in train_loader:
             sim_states, patient_zero = sample['sim_states'].to(device), sample['patient_zero'].to(device)
-            forecast_label = sample['forecast_label'].to(device).permute(0, 2, 1)
+            forecast_label = sample['forecast_label'].to(device).permute(0, 2, 1).float()
+
+            # print(f"shape of sim_states {sim_states.shape}")
+            # print(f"shape of forecast_label {forecast_label.shape}")
             
             for i in range(len(sample['dynamic_edge_list'])):
                 sample['dynamic_edge_list'][i] = sample['dynamic_edge_list'][i][0].to(device)
             dynamic_edge_list = sample['dynamic_edge_list']
 
+            # print(f"type of the dynamic edge list {type(dynamic_edge_list)}")
+            # print(f"length of the dynamic edge list {len(dynamic_edge_list)}")
+            # print(f"length of first timestamp of dynamic edge list {len(dynamic_edge_list[0])}")
+
             optimizer.zero_grad()
             output = model(sim_states, dynamic_edge_list)
-            # print(f"output shape: {output.shape}, forecast_label shape: {forecast_label.shape}")
+
+            # print(f"output shape: {output.shape}, forecast_label shape: {forecast_label}")
 
             num_positive = forecast_label.sum()
             num_negative = forecast_label.numel() - num_positive
@@ -40,7 +48,6 @@ def train(model, train_loader, valid_loader, test_loader, optimizer, num_epochs,
 
             criterion = nn.BCEWithLogitsLoss(pos_weight=pos_weight)
             criterion.to(device)
-            # print(f"output shape: {output.shape}, target shape: {target.shape}")
             loss = criterion(output, forecast_label)
 
             loss.backward()
@@ -135,7 +142,7 @@ def main():
     args = parser.parse_args()
 
     set_seed(args.seed)
-    log_path = f'./log/UVA/{args.model}/forecast'
+    log_path = f'./log/{args.dataset}/{args.model}/forecast'
     init_path(log_path)
     log_path += f'/tsh{args.timestep_hidden}-pre{args.pred_interval}-lr{args.lr}-b{args.batch_size}-drop{args.dropout}'
     log_path += f'-agg' if args.agg else ''
@@ -146,24 +153,44 @@ def main():
     logging.info(args)
 
     device = torch.device(args.device if torch.cuda.is_available() else 'cpu')
-    if args.agg == True:
-        logging.info('Aggregated Hypergraph')
-        data = torch.load('data/sim#0/DynamicSim_uva_ic1_pathogen_aggH.pt')
-    if args.agg == False:
-        logging.info('Sparse Hypergraph')
-        data = torch.load('data/sim#0/DynamicSim_uva_ic1_pathogen.pt')
+    interested_interval = args.timestep_hidden + args.known_interval
+    if args.dataset == 'UVA':
+        if args.agg == True:
+            logging.info('Aggregated Hypergraph')
+            data = torch.load('data/sim#0/DynamicSim_uva_ic1_pathogen_aggH.pt')
+        if args.agg == False:
+            logging.info('Sparse Hypergraph')
+            data = torch.load('data/sim#0/DynamicSim_uva_ic1_pathogen.pt')
+        data.forecast_label = data.sim_states[:, interested_interval:interested_interval + args.pred_interval, :, 1]
+        data.dynamic_hypergraph = data.dynamic_hypergraph[0:interested_interval, :, :]
+        data.dynamic_edge_list = process_hyperedges_incidence(data.dynamic_hypergraph, interested_interval)
+        horizon = data.hyperparameters['horizon']
+        assert data is not None, 'Data not found'
+    
+    if args.dataset == 'EpiSim':
+        data = torch.load("data/epiSim/simulated_epi.pt")
+        data.sim_states = data.sim_states.float()
+        data.patient_zero = data.patient_zero.float()
+        data.patient_zero = torch.unsqueeze(data.patient_zero, 1)
+        data.dynamic_hypergraph = data.dynamic_hypergraph.float()
+        horizon = data.sim_states.shape[1]
+        pre_symptom = data.sim_states[:, interested_interval:interested_interval + args.pred_interval, :, 1]
+        symptom = data.sim_states[:, interested_interval:interested_interval + args.pred_interval, :, 2]
+        critical = data.sim_states[:, interested_interval:interested_interval + args.pred_interval, :, 3]
+        #combine the three states into one using OR operation
+        data.forecast_label = torch.logical_or(torch.logical_or(pre_symptom, symptom), critical)
+        data.dynamic_hypergraph = data.dynamic_hypergraph[0:interested_interval, :, :]
+        data.dynamic_edge_list = process_hyperedges_incidence(data.dynamic_hypergraph, interested_interval, multiple_instance=True)
+        args.in_channels = 10
+        print(len(data.dynamic_edge_list))
+        
+    print(data)
 
-    horizon = data.hyperparameters['horizon']
-    assert data is not None, 'Data not found'
     assert horizon > args.timestep_hidden, 'Horizon should be greater than timestep_hidden'
 
     data.sim_states[:, 0:args.timestep_hidden, :, :] = 0 # mask the first timestep_hidden timesteps
 
-    interested_interval = args.timestep_hidden + args.known_interval
-    data.forecast_label = data.sim_states[:, interested_interval:interested_interval + args.pred_interval, :, 1]
     data.sim_states = data.sim_states[:, 0:interested_interval, :, :]
-    data.dynamic_hypergraph = data.dynamic_hypergraph[0:interested_interval, :, :]
-    data.dynamic_edge_list = process_hyperedges_incidence(data.dynamic_hypergraph, interested_interval)
     args.len_input = interested_interval
     args.num_for_predict = args.pred_interval
 
@@ -173,7 +200,10 @@ def main():
 
     train_data, valid_data, test_data = split_dataset(data, seed=args.seed)
 
-    train_data, valid_data, test_data = DynamicHypergraphDataset(train_data), DynamicHypergraphDataset(valid_data), DynamicHypergraphDataset(test_data)
+    if args.dataset == 'UVA':
+        train_data, valid_data, test_data = DynamicHypergraphDataset(train_data), DynamicHypergraphDataset(valid_data), DynamicHypergraphDataset(test_data)
+    if args.dataset == 'EpiSim':
+        train_data, valid_data, test_data = DynamicHypergraphDataset(train_data, multiple_instance=True), DynamicHypergraphDataset(valid_data, multiple_instance=True), DynamicHypergraphDataset(test_data, multiple_instance=True)
     train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True)
     valid_loader = DataLoader(valid_data, batch_size=args.batch_size, shuffle=False)
     test_loader = DataLoader(test_data, batch_size=args.batch_size, shuffle=False)

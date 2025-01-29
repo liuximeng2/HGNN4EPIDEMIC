@@ -23,45 +23,66 @@ class StaticHypergraphDataset(Dataset):
     
 
 class DynamicHypergraphDataset(Dataset):
-    def __init__(self, data):
+    def __init__(self, data, multiple_instance=False):
         self.sim_states = data.sim_states.clone().detach()
         self.patient_zero = data.patient_zero.clone().detach()
         self.dynamic_hgraph = data.dynamic_hgraph.clone().detach()
         self.forecast_label = data.forecast_label.clone().detach()
         self.dynamic_edge_list = data.dynamic_edge_list
+
+        self.is_multiple_instance = multiple_instance
     
     def __len__(self):
         return self.sim_states.size(0)
     
     def __getitem__(self, idx):
-        sample = {
-            'sim_states': self.sim_states[idx],
-            'patient_zero': self.patient_zero[idx],
-            'forecast_label': self.forecast_label[idx],
-            'dynamic_hgraph': self.dynamic_hgraph,
-            'dynamic_edge_list': self.dynamic_edge_list
-        }
+
+        if self.is_multiple_instance == False:
+            sample = {
+                'sim_states': self.sim_states[idx],
+                'patient_zero': self.patient_zero[idx],
+                'forecast_label': self.forecast_label[idx],
+                'dynamic_hgraph': self.dynamic_hgraph,
+                'dynamic_edge_list': self.dynamic_edge_list
+            }
+        else:
+            sample = {
+                'sim_states': self.sim_states[idx],
+                'patient_zero': self.patient_zero[idx],
+                'forecast_label': self.forecast_label[idx],
+                'dynamic_hgraph': self.dynamic_hgraph[idx],
+                'dynamic_edge_list': self.dynamic_edge_list[idx]
+            }
         return sample
     
-def process_hyperedges_incidence(H, horizon):
-        """
-        Processes the incidence matrix to create edge_index for HypergraphConv
+def process_hyperedges_incidence(H, horizon, multiple_instance=False):
 
-        Args:
-            H (torch.Tensor): Incidence matrix of shape [num_hyperedge, num_node]
+        if multiple_instance == False:
+            dynamic_edge_list = []
+            for t in range(horizon):
+                # Find indices where the incidence matrix is non-zero
+                hyperedge_indices, node_indices = H[t].nonzero(as_tuple=True)
 
-        Returns:
-            torch.Tensor: edge_index of shape [2, num_edges]
-        """
-        dynamic_edge_list = []
-        for t in range(horizon):
-            # Find indices where the incidence matrix is non-zero
-            hyperedge_indices, node_indices = H[t].nonzero(as_tuple=True)
+                # edge_index: [2, num_edges] where the first row is node indices, and the second row is hyperedge indices
+                edge_index = torch.stack([node_indices, hyperedge_indices], dim=0)
+                dynamic_edge_list.append(edge_index)
+            return dynamic_edge_list
+        else:
+            num_instance = H.shape[0]
+            full_dynamic_edge_list = []
+            for i in range(num_instance):
+                dynamic_edge_list = []
+                for t in range(horizon):
+                    # Find indices where the incidence matrix is non-zero
+                    hyperedge_indices, node_indices = H[i, t].nonzero(as_tuple=True)
 
-            # edge_index: [2, num_edges] where the first row is node indices, and the second row is hyperedge indices
-            edge_index = torch.stack([node_indices, hyperedge_indices], dim=0)
-            dynamic_edge_list.append(edge_index)
-        return dynamic_edge_list
+                    # edge_index: [2, num_edges] where the first row is node indices, and the second row is hyperedge indices
+                    edge_index = torch.stack([node_indices, hyperedge_indices], dim=0)
+                    dynamic_edge_list.append(edge_index)
+                full_dynamic_edge_list.append(dynamic_edge_list)
+
+            return full_dynamic_edge_list
+
 
 def find_influenced_nodes(initial_nodes, hypergraph_sequence):
     # Convert initial nodes to a set for efficient membership testing
