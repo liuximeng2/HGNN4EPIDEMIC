@@ -1,3 +1,0 @@
-INFO:root:Namespace(batch_size=2, dataset='random', dropout=0.3, epoch=100, hidden_size=256, lr=0.0001, mlp_layer=3, model='THGNN', out_channels=8, punishment=5, seed=0, struc='hgraph', temporal_layer=3, timestep_hidden=5)
-INFO:root:******************* Training Started *******************
-INFO:root:Epoch 0/100, Loss: 3.8158
