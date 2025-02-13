@@ -2,9 +2,10 @@ from model.static_model import THGNN, TGCN
 from model.dynamic_model import DTHGNN, DTGNN, FDTHGNN
 from model.astgcn import ASTGCN
 from model.mstgcn import MSTGCN
+from model.msthgnn import MSTHGNN
 
-seed = 0
 batch_size = 1
+seed = 0
 
 model_dict = {
     'THGNN': {
@@ -45,27 +46,23 @@ model_dict = {
         'class': DTHGNN,
         'default_args': {
             'seed': seed,
-            'epochs': 100,
             'lr': 0.0005,
             'batch_size': batch_size,
             'in_channels': 3,
-            'out_channels': 8,
+            'out_channels': 256,
             'hidden_channels': 256,
-            'mlp_layer': 2,
             'temporal_layer': 2,
             'spatial_layer': 1,            
             'weight_decay': 1e-4,
             'dropout': 0.5,
             'time_strides': 1,
-            'num_for_predict': 1,
-            'nb_time_filter': 5
+            'nb_time_filter': 3
         }
     },
     'DTGNN': {
         'class': DTGNN,
         'default_args': {
             'seed': seed,
-            'epochs': 100,
             'lr': 0.0005,
             'batch_size': batch_size,
             'in_channels': 3,
@@ -77,7 +74,6 @@ model_dict = {
             'weight_decay': 1e-4,
             'dropout': 0.5,
             'time_strides': 1,
-            'num_for_predict': 1,
             'nb_time_filter': 5
         }
     },
@@ -85,7 +81,6 @@ model_dict = {
         'class': ASTGCN,
         'default_args': {
             'seed': seed,
-            'epochs': 200,
             'lr': 0.0005,
             'batch_size': batch_size,      
             'weight_decay': 0.0,
@@ -96,7 +91,6 @@ model_dict = {
             'nb_chev_filter': 256,
             'nb_time_filter': 5,
             'time_strides': 1,
-            'num_for_predict': 1,
             'num_of_vertices': 2500,
         }
     },
@@ -104,7 +98,6 @@ model_dict = {
         'class': MSTGCN,
         'default_args': {
             'seed': seed,
-            'epochs': 100,
             'lr': 0.0005,
             'batch_size': batch_size,      
             'weight_decay': 1e-4,
@@ -115,7 +108,23 @@ model_dict = {
             'nb_chev_filter': 256,
             'nb_time_filter': 5,
             'time_strides': 1,
-            'num_for_predict': 1,
+            'num_of_vertices': 2500,
+        }
+    },
+    'MSTHGNN': {
+        'class': MSTHGNN,
+        'default_args': {
+            'seed': seed,
+            'lr': 0.0005,
+            'batch_size': batch_size,      
+            'weight_decay': 1e-4,
+            'dropout': 0.5,
+            'nb_block': 2,
+            'in_channels': 3,
+            'K': 3,
+            'nb_chev_filter': 256,
+            'nb_time_filter': 5,
+            'time_strides': 1,
             'num_of_vertices': 2500,
         }
     },
@@ -123,7 +132,6 @@ model_dict = {
         'class': FDTHGNN,
         'default_args': {
             'seed': seed,
-            'epochs': 100,
             'lr': 0.0005,
             'batch_size': batch_size,
             'in_channels': 3,
@@ -135,8 +143,7 @@ model_dict = {
             'weight_decay': 1e-4,
             'dropout': 0.5,
             'time_strides': 1,
-            'num_for_predict': 10,
-            'nb_time_filter': 5
+            'nb_time_filter': 3
         }
     }
 }

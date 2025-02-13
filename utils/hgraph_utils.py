@@ -56,18 +56,26 @@ class DynamicHypergraphDataset(Dataset):
         return sample
     
 def process_hyperedges_incidence(H, horizon, multiple_instance=False):
-
+        """
+        Convert the incidence matrices of hyperedges to edge lists.
+        """
+        print("Converting Hyperedges to Tensors")
         if multiple_instance == False:
             dynamic_edge_list = []
             for t in range(horizon):
+                num_hyperedge = H[0].shape[0]
                 # Find indices where the incidence matrix is non-zero
                 hyperedge_indices, node_indices = H[t].nonzero(as_tuple=True)
+                if max(hyperedge_indices) + 1 < num_hyperedge:
+                        hyperedge_indices = torch.cat((hyperedge_indices, torch.tensor([num_hyperedge -1])))
+                        node_indices = torch.cat((node_indices, torch.tensor([0])))
 
                 # edge_index: [2, num_edges] where the first row is node indices, and the second row is hyperedge indices
                 edge_index = torch.stack([node_indices, hyperedge_indices], dim=0)
                 dynamic_edge_list.append(edge_index)
             return dynamic_edge_list
         else:
+            num_hyperedge = H[0].shape[1]
             num_instance = H.shape[0]
             full_dynamic_edge_list = []
             for i in range(num_instance):
@@ -75,6 +83,11 @@ def process_hyperedges_incidence(H, horizon, multiple_instance=False):
                 for t in range(horizon):
                     # Find indices where the incidence matrix is non-zero
                     hyperedge_indices, node_indices = H[i, t].nonzero(as_tuple=True)
+
+                    if max(hyperedge_indices) + 1 < num_hyperedge:
+                        # print(f"max(hyperedge_indices): {max(hyperedge_indices) + 1}")
+                        hyperedge_indices = torch.cat((hyperedge_indices, torch.tensor([num_hyperedge -1])))
+                        node_indices = torch.cat((node_indices, torch.tensor([0])))
 
                     # edge_index: [2, num_edges] where the first row is node indices, and the second row is hyperedge indices
                     edge_index = torch.stack([node_indices, hyperedge_indices], dim=0)

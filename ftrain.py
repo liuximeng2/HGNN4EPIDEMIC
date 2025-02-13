@@ -138,7 +138,7 @@ def main():
         parser.add_argument(f"--{arg}", type=type(default), default=default)
     
     parser.add_argument("--agg", action="store_true")
-    parser.add_argument("--partial", action="store_true")
+    parser.add_argument("--location_aware", action="store_true")
     args = parser.parse_args()
 
     set_seed(args.seed)
@@ -146,7 +146,6 @@ def main():
     init_path(log_path)
     log_path += f'/tsh{args.timestep_hidden}-pre{args.pred_interval}-lr{args.lr}-b{args.batch_size}-drop{args.dropout}'
     log_path += f'-agg' if args.agg else ''
-    log_path += f'-partial' if args.partial else ''
     log_path += '.log'
     logging.basicConfig(filename=log_path, level=logging.INFO)
     logging.info(now)

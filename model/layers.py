@@ -67,7 +67,7 @@ class HypergraphConv(MessagePassing):
     """
 
     def __init__(self, in_channels, out_channels, symdegnorm=False, use_attention=False, heads=1,
-                 concat=True, negative_slope=0.2, dropout=0, bias=True,
+                 concat=True, negative_slope=0.2, dropout=0, bias=True, location_aware = False,
                  **kwargs):
         kwargs.setdefault('aggr', 'add')
         super(HypergraphConv, self).__init__(node_dim=0, **kwargs)
@@ -92,8 +92,10 @@ class HypergraphConv(MessagePassing):
 
         if bias and concat:
             self.bias = Parameter(torch.Tensor(heads * out_channels))
+            self.edge_bias = Parameter(torch.Tensor(heads * out_channels))
         elif bias and not concat:
             self.bias = Parameter(torch.Tensor(out_channels))
+            self.edge_bias = Parameter(torch.Tensor(out_channels))
         else:
             self.register_parameter('bias', None)
 
@@ -163,21 +165,25 @@ class HypergraphConv(MessagePassing):
 
             x = D.unsqueeze(-1)*x
             self.flow = 'source_to_target'
-            out = self.propagate(hyperedge_index, x=x, norm=B, alpha=alpha,
-                                 size=(num_nodes, num_edges))
+            hyperedge_emb = self.propagate(hyperedge_index, x=x, norm=B, alpha=alpha,
+                                 size=(num_nodes, num_edges)) # hyperedge embedding
+                                 
             self.flow = 'target_to_source'
-            out = self.propagate(hyperedge_index, x=out, norm=D, alpha=alpha,
-                                 size=(num_edges, num_nodes))
+            node_emb = self.propagate(hyperedge_index, x=hyperedge_emb, norm=D, alpha=alpha,
+                                 size=(num_edges, num_nodes)) # node embedding
 
         if self.concat is True:
-            out = out.view(-1, self.heads * self.out_channels)
+            node_emb = node_emb.view(-1, self.heads * self.out_channels)
+            hyperedge_emb = hyperedge_emb.view(-1, self.heads * self.out_channels)
         else:
-            out = out.mean(dim=1)
+            node_emb = node_emb.mean(dim=1)
+            hyperedge_emb = hyperedge_emb.mean(dim=1)
 
         if self.bias is not None:
-            out = out + self.bias
+            node_emb = node_emb + self.bias
+            hyperedge_emb = hyperedge_emb + self.edge_bias
 
-        return out
+        return node_emb, hyperedge_emb
 
     def message(self, x_j: Tensor, norm_i: Tensor, alpha: Tensor) -> Tensor:
         H, F = self.heads, self.out_channels
@@ -207,6 +213,7 @@ class MLP(nn.Module):
             self.lins.append(torch.nn.Linear(hidden_channels, out_channels))
 
         self.dropout = dropout
+        self.sigmoid = nn.Sigmoid()
     
     def forward(self, x):
 
@@ -216,4 +223,42 @@ class MLP(nn.Module):
             x = F.dropout(x, p=self.dropout, training=self.training)
         x = self.lins[-1](x)
 
-        return x
+        return self.sigmoid(x)
+
+
+class TemporalAttentionAggregator(nn.Module):
+    def __init__(self, embed_dim):
+        """
+        Args:
+            embed_dim (int): The dimension of the node embeddings.
+        """
+        super(TemporalAttentionAggregator, self).__init__()
+        # A simple projection to compute a score per time step.
+        self.attn_proj = nn.Linear(embed_dim, 1)
+
+    def forward(self, embeddings):
+        """
+        Args:
+            embeddings (Tensor): Node embeddings over time of shape 
+                                 [batch_size, T, num_nodes, embed_dim].
+        Returns:
+            aggregated (Tensor): The aggregated node embeddings of shape 
+                                 [batch_size, num_nodes, embed_dim].
+        """
+        batch_size, T, num_nodes, embed_dim = embeddings.shape
+        # Reshape to [batch_size*num_nodes, T, embed_dim] to process each node independently.
+        embeddings = embeddings.permute(0, 2, 1, 3)
+        embeddings_reshaped = embeddings.view(batch_size * num_nodes, T, embed_dim)
+        
+        # Compute attention scores for each time step: shape [batch_size*num_nodes, T, 1]
+        scores = self.attn_proj(embeddings_reshaped)
+        
+        # Apply softmax over the time dimension to obtain attention weights.
+        attn_weights = F.softmax(scores, dim=1)  # shape: [batch_size*num_nodes, T, 1]
+        
+        # Compute the weighted sum of embeddings over time.
+        aggregated = torch.sum(attn_weights * embeddings_reshaped, dim=1)  # shape: [batch_size*num_nodes, embed_dim]
+        
+        # Reshape back to [batch_size, num_nodes, embed_dim]
+        aggregated = aggregated.view(batch_size, num_nodes, embed_dim)
+        return aggregated
