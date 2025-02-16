@@ -1,327 +1,43 @@
-absl-py==1.0.0
-aiohttp==3.8.4
-aiosignal==1.3.1
-alabaster @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/alabaster/alabaster-0.7.13
-antlr4-python3-runtime==4.8
-anyio==3.7.1
-appdirs @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/appdirs/appdirs-1.4.4
-argcomplete @ file:///tmp/build/80754af9/argcomplete_1618920853202/work
-argon2-cffi==23.1.0
-argon2-cffi-bindings==21.2.0
-arrow==1.2.3
-asn1crypto @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/asn1crypto/asn1crypto-1.5.1
-async-generator==1.10
-async-timeout==4.0.2
-asynctest==0.13.0
-atomicwrites @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/atomicwrites/atomicwrites-1.4.1
-attrs @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/attrs/attrs-23.1.0
-Babel @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/Babel/Babel-2.12.1
-backcall @ file:///home/ktietz/src/ci/backcall_1611930011877/work
-backports.entry-points-selectable @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/backportsentrypointsselectable/backports.entry_points_selectable-1.2.0
-backports.functools-lru-cache @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/backportsfunctools_lru_cache/backports.functools_lru_cache-1.6.5
-beautifulsoup4==4.11.1
-bibtexparser==1.4.0
-bitstring @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/bitstring/bitstring-4.0.2
-bleach==6.0.0
-blist @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/blist/blist-1.3.6
-Bottleneck==1.3.2
-brotlipy==0.7.0
-CacheControl @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/CacheControl/CacheControl-0.12.14
-cachetools==5.0.0
-cachy @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/cachy/cachy-0.3.0
-captum==0.2.0
-certifi @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/certifi/certifi-2023.5.7
-cffi @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/cffi/cffi-1.15.1
-chardet @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/chardet/chardet-5.1.0
-charset-normalizer @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/charsetnormalizer/charset-normalizer-3.1.0
-cilog==1.2.3
-cleo @ file:///mnt/research/helpdesk/src/p/Python-bundle-PyPI/extensions/cleo-2.0.1-py3-none-any.whl#sha256=6eb133670a3ed1f3b052d53789017b6e50fca66d1287e6e6696285f4cb8ea448
-click @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/click/click-8.1.3
-cloudpickle @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/cloudpickle/cloudpickle-2.2.1
-colorama @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/colorama/colorama-0.4.6
-commonmark @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/commonmark/commonmark-0.9.1
-coverage==6.5.0
-crashtest @ file:///mnt/research/helpdesk/src/p/Python-bundle-PyPI/extensions/crashtest-0.4.1-py3-none-any.whl#sha256=8d23eac5fa660409f57472e3851dab7ac18aba459a8d19cbbba86d3d5aecd2a5
-cryptography @ file:///tmp/grosscra/easybuild/easybuild/build/cryptography/41.0.1/GCCcore-12.3.0/cryptography-41.0.1
-cvxopt==1.3.0
-cycler==0.10.0
-Cython @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/Cython/Cython-0.29.35
-daal4py==2021.3.0
-datasets==2.13.1
-debugpy @ file:///tmp/build/80754af9/debugpy_1637091426235/work
-decorator @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/decorator/decorator-5.1.1
-deeprobust==0.2.7
-defusedxml==0.7.1
-Deprecated==1.2.13
-dgl-cu102==0.6.1
-dill==0.3.6
-distlib @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/distlib/distlib-0.3.6
-distro @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/distro/distro-1.8.0
-dive-into-graphs==1.0.0
-docopt @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/docopt/docopt-0.6.2
-docutils @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/docutils/docutils-0.20.1
-doit @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/doit/doit-0.36.0
-dulwich @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/dulwich/dulwich-0.21.5
-ecdsa @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/ecdsa/ecdsa-0.18.0
-editables @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/editables/editables-0.3
-entrypoints==0.3
-et-xmlfile==1.1.0
-exceptiongroup @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/exceptiongroup/exceptiongroup-1.1.1
-execnet @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/execnet/execnet-1.9.0
-fake-useragent==0.1.11
-fastjsonschema==2.19.1
-filelock @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/filelock/filelock-3.12.2
-flit_core @ file:///opt/conda/conda-bld/flit-core_1644941570762/work/source/flit_core
-fonttools==4.38.0
-free-proxy==1.0.6
-frozenlist==1.3.3
-fsspec @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/fsspec/fsspec-2023.6.0
-future @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/future/future-0.18.3
-gdown==4.4.0
-gensim==3.8.3
-gitdb==4.0.9
-GitPython==3.1.27
-glob2 @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/glob2/glob2-0.7
-google-auth==2.6.0
-google-auth-oauthlib==0.4.6
-googledrivedownloader @ file:///home/conda/feedstock_root/build_artifacts/googledrivedownloader_1619807768586/work
-GPUtil==1.4.0
--e git+https://github.com/divelab/GOOD.git@5cf3aa53acbffb24a079e2af1c45cd543e15b9ab#egg=graph_ood
-grpcio==1.43.0
-h11==0.14.0
-h5py==3.7.0
-html5lib @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/html5lib/html5lib-1.1
-huggingface-hub==0.16.4
-hydra-core==1.1.1
-idna @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/idna/idna-3.4
-imageio==2.20.0
-imagesize @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/imagesize/imagesize-1.4.1
-importlib-metadata @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/importlib_metadata/importlib_metadata-6.7.0
-importlib-resources @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/importlib_resources/importlib_resources-5.12.0
-iniconfig @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/iniconfig/iniconfig-2.0.0
-intervaltree @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/intervaltree/intervaltree-3.1.0
-intreehooks @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/intreehooks/intreehooks-1.0
-ipaddress @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/ipaddress/ipaddress-1.0.23
-ipdb==0.13.7
-ipykernel @ file:///tmp/build/80754af9/ipykernel_1633545415328/work/dist/ipykernel-6.4.1-py3-none-any.whl
-ipython==7.22.0
-ipython-genutils @ file:///tmp/build/80754af9/ipython_genutils_1606773439826/work
-isodate==0.6.1
-jaraco.classes @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/jaracoclasses/jaraco.classes-3.2.3
-jedi @ file:///tmp/build/80754af9/jedi_1611333758854/work
-jeepney @ file:///mnt/research/helpdesk/src/p/Python-bundle-PyPI/extensions/jeepney-0.8.0-py3-none-any.whl#sha256=c0a454ad016ca575060802ee4d590dd912e35c122fa04e70306de3d076cce755
-Jinja2 @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/Jinja2/Jinja2-3.1.2
-joblib @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/joblib/joblib-1.2.0
-jsonpickle==1.5.2
-jsonschema @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/jsonschema/jsonschema-4.17.3
-jupyter-client @ file:///tmp/build/80754af9/jupyter_client_1640335223713/work
-jupyter-server==1.24.0
-jupyter_core==4.12.0
-jupyterlab-pygments==0.2.2
-jupyterthemes==0.20.0
-kernels @ file:///mnt/ufs18/home-111/jinwei2/Colosseum/git/robustness_of_gnns_at_scale/kernels
-keyring @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/keyring/keyring-23.13.1
-keyrings.alt @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/keyringsalt/keyrings.alt-4.2.0
-kiwisolver==1.3.2
-lesscpy==0.15.1
-liac-arff @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/liacarff/liac-arff-2.5.0
-littleutils==0.2.2
-llvmlite==0.37.0
-lockfile @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/lockfile/lockfile-0.12.2
-lxml==4.9.1
-Markdown==3.3.6
-markdown-it-py @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/markdownitpy/markdown-it-py-3.0.0
-MarkupSafe @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/MarkupSafe/MarkupSafe-2.1.3
-matplotlib==3.5.3
-matplotlib-inline @ file:///tmp/build/80754af9/matplotlib-inline_1628242447089/work
-mdurl @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/mdurl/mdurl-0.1.2
-mistune==3.0.2
-mkl-fft==1.3.0
-mkl-random @ file:///tmp/build/80754af9/mkl_random_1618853974840/work
-mkl-service==2.3.0
-mock @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/mock/mock-5.0.2
-more-itertools @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/moreitertools/more-itertools-9.1.0
-mpmath==1.2.1
-msgpack @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/msgpack/msgpack-1.0.5
-multidict==6.0.4
-multiprocess==0.70.14
-munch==2.5.0
-mypy-extensions==0.4.3
-nbclassic==1.0.0
-nbclient==0.7.4
-nbconvert==7.6.0
-nbformat==5.8.0
-nest-asyncio @ file:///tmp/build/80754af9/nest-asyncio_1613680548246/work
-netaddr @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/netaddr/netaddr-0.8.0
-netifaces @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/netifaces/netifaces-0.11.0
-networkx==2.6.3
-notebook==6.5.6
-notebook_shim==0.2.3
-numba==0.54.1
-numexpr==2.8.6
-numpy @ file:///tmp/build/80754af9/numpy_and_numpy_base_1618497199865/work
-oauthlib==3.2.0
-ogb==1.3.6
-omegaconf==2.1.1
-openpyxl==3.0.9
-outcome==1.2.0
-outdated==0.2.1
-packaging @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/packaging/packaging-23.1
-pandas==1.2.3
-pandocfilters==1.5.1
-parso==0.8.2
-pastel @ file:///mnt/research/helpdesk/src/p/Python-bundle-PyPI/extensions/pastel-0.2.1-py2.py3-none-any.whl#sha256=4349225fcdf6c2bb34d483e523475de5bb04a5c10ef711263452cb37d7dd4364
-pathlib2 @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pathlib2/pathlib2-2.3.7.post1
-pathspec @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pathspec/pathspec-0.11.1
-pbr @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pbr/pbr-5.11.1
-pexpect @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pexpect/pexpect-4.8.0
-pickleshare @ file:///tmp/build/80754af9/pickleshare_1606932040724/work
-Pillow==9.2.0
-pipreqs==0.4.11
-pkginfo @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pkginfo/pkginfo-1.9.6
-platformdirs @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/platformdirs/platformdirs-3.8.0
-pluggy @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pluggy/pluggy-1.2.0
-ply==3.11
-pooch @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pooch/pooch-1.7.0
-prometheus-client==0.17.1
-prompt-toolkit==3.0.18
-protobuf==3.20.1
-psutil @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/psutil/psutil-5.9.5
-ptyprocess @ file:///mnt/research/helpdesk/src/p/Python-bundle-PyPI/extensions/ptyprocess-0.7.0-py2.py3-none-any.whl#sha256=4b41f3967fce3af57cc7e94b888626c18bf37a083e3651ca8feeb66d492fef35
-py @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/py/py-1.11.0
-py-cpuinfo==8.0.0
-py-expression-eval @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/py_expression_eval/py_expression_eval-0.3.14
-pyarrow==12.0.1
-pyasn1 @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pyasn1/pyasn1-0.5.0
-pyasn1-modules==0.2.8
-pycparser @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pycparser/pycparser-2.21
-pycryptodome @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pycryptodome/pycryptodome-3.18.0
-pydevtool @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pydevtool/pydevtool-0.3.0
-PyGCL==0.1.2
-Pygments @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/Pygments/Pygments-2.15.1
-pylev @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pylev/pylev-1.4.0
-PyNaCl @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/PyNaCl/PyNaCl-1.5.0
-pynvml==11.4.1
-pyOpenSSL @ file:///home/conda/feedstock_root/build_artifacts/pyopenssl_1633192417276/work
-pyparsing @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pyparsing/pyparsing-3.1.0
-pyrsistent @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pyrsistent/pyrsistent-0.19.3
-pyscf==1.7.6.post1
-PySocks @ file:///home/conda/feedstock_root/build_artifacts/pysocks_1610291444829/work
-pytest @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pytest/pytest-7.4.0
-pytest-cov==3.0.0
-pytest-forked==1.4.0
-pytest-xdist @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pytestxdist/pytest-xdist-3.3.1
-python-dateutil @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pythondateutil/python-dateutil-2.8.2
-python-dotenv==0.21.0
-python-louvain @ file:///home/conda/feedstock_root/build_artifacts/python-louvain_1609125227889/work
-pytoml @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pytoml/pytoml-0.1.21
-pytz @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/pytz/pytz-2023.3
-PyWavelets==1.3.0
-PyYAML==5.3.1
-pyzmq @ file:///tmp/build/80754af9/pyzmq_1638434924971/work
-rapidfuzz @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/rapidfuzz/rapidfuzz-2.15.1
-ray==1.9.2
-rdflib==6.1.1
-rdkit-pypi==2021.3.5.1
-readme-renderer==37.3
-redis==4.1.2
-regex @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/regex/regex-2023.6.3
-requests @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/requests/requests-2.31.0
-requests-oauthlib==1.3.1
-requests-toolbelt @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/requeststoolbelt/requests-toolbelt-1.0.0
-rfc3986==2.0.0
-rgnn-at-scale @ file:///mnt/ufs18/home-111/jinwei2/Colosseum/git/robustness_of_gnns_at_scale
-rich @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/rich/rich-13.4.2
-rich-click @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/richclick/rich-click-1.6.1
-rsa==4.8
-ruamel.yaml==0.17.21
-ruamel.yaml.clib==0.2.7
-sacred==0.8.2
-safetensors==0.3.1
-scandir @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/scandir/scandir-1.10.0
-scholarly==1.7.2
-scikit-image==0.19.3
-scikit-learn==0.24.1
-scikit-learn-intelex==2021.20210714.150629
-scipy @ file:///tmp/build/80754af9/scipy_1618852618548/work
-seaborn==0.11.2
-SecretStorage @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/SecretStorage/SecretStorage-3.3.3
-selenium==4.5.0
-semantic-version @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/semantic_version/semantic_version-2.10.0
-Send2Trash==1.8.2
-shap==0.40.0
-shellingham @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/shellingham/shellingham-1.5.0.post1
-simplegeneric @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/simplegeneric/simplegeneric-0.8.1
-simplejson @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/simplejson/simplejson-3.19.1
-six @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/six/six-1.16.0
-slicer==0.0.7
-smart-open==6.0.0
-smmap==5.0.0
-sniffio==1.3.0
-snowballstemmer @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/snowballstemmer/snowballstemmer-2.2.0
-sortedcontainers @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/sortedcontainers/sortedcontainers-2.4.0
-soupsieve==2.3.2.post1
-Sphinx @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/Sphinx/Sphinx-7.0.1
-sphinx-bootstrap-theme @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/sphinxbootstraptheme/sphinx-bootstrap-theme-0.8.1
-sphinx-rtd-theme==1.0.0
-sphinxcontrib-applehelp @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/sphinxcontribapplehelp/sphinxcontrib-applehelp-1.0.4
-sphinxcontrib-devhelp @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/sphinxcontribdevhelp/sphinxcontrib-devhelp-1.0.2
-sphinxcontrib-htmlhelp @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/sphinxcontribhtmlhelp/sphinxcontrib-htmlhelp-2.0.1
-sphinxcontrib-jsmath @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/sphinxcontribjsmath/sphinxcontrib-jsmath-1.0.1
-sphinxcontrib-qthelp @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/sphinxcontribqthelp/sphinxcontrib-qthelp-1.0.3
-sphinxcontrib-serializinghtml @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/sphinxcontribserializinghtml/sphinxcontrib-serializinghtml-1.1.5
-sphinxcontrib-websupport @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/sphinxcontribwebsupport/sphinxcontrib-websupport-1.2.4
-sympy==1.9
-tabulate @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/tabulate/tabulate-0.9.0
-tensorboard==2.8.0
-tensorboard-data-server==0.6.1
-tensorboard-plugin-wit==1.8.1
-tensorboardX==2.5.1
-terminado==0.17.1
-texttable==1.6.4
-threadpoolctl @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/threadpoolctl/threadpoolctl-3.1.0
-tifffile==2021.11.2
-tinycss2==1.2.1
-tinydb==4.7.0
-tinydb-serialization==2.1.0
-tokenizers==0.13.3
-toml @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/toml/toml-0.10.2
-tomli @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/tomli/tomli-2.0.1
-tomli_w @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/tomli_w/tomli_w-1.0.0
-tomlkit @ file:///mnt/research/helpdesk/src/p/Python-bundle-PyPI/extensions/tomlkit-0.11.8-py3-none-any.whl#sha256=8c726c4c202bdb148667835f68d68780b9a003a9ec34167b6c673b38eff2a171
-torch==1.8.1
-torch-cluster @ file:///usr/share/miniconda/envs/test/conda-bld/pytorch-cluster_1631028839095/work
-torch-geometric @ file:///usr/share/miniconda/envs/test/conda-bld/pyg_1631774989825/work
-torch-geometric-temporal==0.54.0
-torch-scatter @ file:///usr/share/miniconda/envs/test/conda-bld/pytorch-scatter_1631017309164/work
-torch-sparse @ file:///usr/share/miniconda/envs/test/conda-bld/pytorch-sparse_1631173705958/work
-torch-spline-conv @ file:///usr/share/miniconda/envs/test/conda-bld/pytorch-spline-conv_1631007556085/work
-torchtyping==0.1.4
-torchvision==0.9.1
-tornado @ file:///tmp/build/80754af9/tornado_1606942283357/work
-tqdm==4.60.0
-traitlets==5.0.5
-transformers==4.30.2
-trio==0.22.0
-trio-websocket==0.9.2
-twine==4.0.2
-typed-argument-parser==1.7.2
-typeguard==2.13.3
-typing-inspect==0.7.1
-typing_extensions==4.2.0
-ujson @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/ujson/ujson-5.8.0
-urllib3 @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/urllib3/urllib3-1.26.16
-virtualenv @ file:///tmp/grosscra/easybuild/easybuild/build/virtualenv/20.23.1/GCCcore-12.3.0/virtualenv/virtualenv-20.23.1
-wcwidth @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/wcwidth/wcwidth-0.2.6
-webencodings @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/webencodings/webencodings-0.5.1
-websocket-client==1.6.1
-Werkzeug==2.0.2
-wrapt==1.13.3
-wsproto==1.2.0
-xlrd @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/xlrd/xlrd-2.0.1
-xxhash==3.2.0
-yacs==0.1.6
-yarg==0.1.9
-yarl==1.9.2
-zipfile36 @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/zipfile36/zipfile36-0.1.3
-zipp @ file:///tmp/grosscra/easybuild/easybuild/build/PythonbundlePyPI/2023.06/GCCcore-12.3.0/zipp/zipp-3.15.0
+accelerate==1.1.1
+asttokens==3.0.0
+backcall==0.2.0
+cmake==3.31.1
+contourpy==1.3.1
+cycler==0.12.1
+et_xmlfile==2.0.0
+executing==2.1.0
+fonttools==4.55.1
+huggingface-hub==0.26.3
+ipdb==0.13.13
+ipython==8.12.3
+jedi==0.19.2
+kiwisolver==1.4.7
+lit==18.1.8
+matplotlib==3.7.5
+matplotlib-inline==0.1.7
+mpmath==1.3.0
+numpy==1.26.4
+openpyxl==3.1.5
+pandas==2.0.3
+parso==0.8.4
+peft==0.13.2
+pickleshare==0.7.5
+pillow==11.0.0
+prompt_toolkit==3.0.48
+pure_eval==0.2.3
+PySocks==1.7.1
+PyYAML==6.0.2
+safetensors==0.4.5
+scikit-learn==1.3.2
+scipy==1.10.1
+seaborn==0.13.2
+stack-data==0.6.3
+sympy==1.13.3
+tokenizers==0.20.3
+torch==1.13.1+cu117
+tqdm==4.67.0
+traitlets==5.14.3
+transformers==4.46.2
+triton==2.0.0
+tzdata==2024.2
+torch_geometric==2.0.1
