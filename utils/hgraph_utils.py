@@ -2,7 +2,7 @@ import numpy as np
 import torch
 from torch.utils.data import Dataset
 from torch_geometric.loader import DataLoader
-import os
+from tqdm import tqdm
 
 class StaticHypergraphDataset(Dataset):
     def __init__(self, data):
@@ -62,7 +62,7 @@ def process_hyperedges_incidence(H, horizon, multiple_instance=False):
         print("Converting Hyperedges to Tensors")
         if multiple_instance == False:
             dynamic_edge_list = []
-            for t in range(horizon):
+            for t in tqdm(range(horizon)):
                 num_hyperedge = H[0].shape[0]
                 # Find indices where the incidence matrix is non-zero
                 hyperedge_indices, node_indices = H[t].nonzero(as_tuple=True)
@@ -78,7 +78,7 @@ def process_hyperedges_incidence(H, horizon, multiple_instance=False):
             num_hyperedge = H[0].shape[1]
             num_instance = H.shape[0]
             full_dynamic_edge_list = []
-            for i in range(num_instance):
+            for i in tqdm(range(num_instance)):
                 dynamic_edge_list = []
                 for t in range(horizon):
                     # Find indices where the incidence matrix is non-zero

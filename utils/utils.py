@@ -113,6 +113,7 @@ def load_data(args, interested_interval):
         horizon = data.hyperparameters['horizon']
         assert data is not None, 'Data not found'
         args.num_hyperedge = 500
+        args.num_of_vertices = 2500
     
     if args.dataset == 'EpiSim':
         data = torch.load("data/epiSim/simulated_epi.pt")
@@ -125,10 +126,10 @@ def load_data(args, interested_interval):
         critical = data.sim_states[:, interested_interval:interested_interval + args.num_for_predict, :, 3]
         #combine the three states into one using OR operation
         data.forecast_label = torch.logical_or(torch.logical_or(pre_symptom, symptom), critical) #[num_sampel, num_individual, timestep]
-        print(f"forecast label shape: {data.forecast_label.shape}")
+        #print(f"forecast label shape: {data.forecast_label.shape}")
         #for all rows of num_individual, only save the first entry with 1 and set the rest to 0. FOR EXAMPLE, [[0, 1, 1, 1, 0], [1, 0, 0, 0, 0]] -> [[0, 1, 0, 0, 0], [1, 0, 0, 0, 0]]
-        #data.forecast_label = retain_first_one(data.forecast_label)
-        print(f"forecast label shape: {data.forecast_label.shape}")
+        # data.forecast_label = retain_first_one(data.forecast_label)
+        #print(f"forecast label shape: {data.forecast_label.shape}")
 
         data.dynamic_hypergraph = data.dynamic_hypergraph[:, 0:interested_interval, :, :]
         data.dynamic_hypergraph = data.dynamic_hypergraph.permute(0, 1, 3, 2)

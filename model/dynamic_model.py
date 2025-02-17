@@ -38,31 +38,39 @@ class DTHGNN(nn.Module):
         self._final_conv = nn.Conv2d(
             int(args.len_input / args.time_strides),
             args.num_for_predict,
-            kernel_size=(1, 8),
+            kernel_size=(1, args.kernal_size),
         )
         
         # Temporal Attention Aggregator for reconstruction.
         self.node_aggregator = nn.Conv2d(
             args.hidden_channels,
             args.hidden_channels,
-            kernel_size=(1, 3)
+            kernel_size=(1, args.kernal_size)
         )
 
         self.edge_aggregator = nn.Conv2d(
             args.hidden_channels, 
             args.hidden_channels, 
-            kernel_size=(1, 3)
+            kernel_size=(1, args.kernal_size)
         )
 
-        decoder_input = args.hidden_channels * (args.len_input - 3)
+        decoder_input = args.hidden_channels * (args.len_input - args.kernal_size)
         # print(f"decoder_input: {decoder_input}")
         self.num_edge = args.num_hyperedge
 
         self.score_decoder = MLP(decoder_input, args.hidden_channels, out_channels=1, num_layers=2, dropout=args.dropout)
 
-        self.gru1 = nn.GRU(args.in_channels, args.hidden_channels, args.temporal_layer, batch_first=True, bidirectional=True, dropout=args.dropout)
-        self.layer_norm1 = nn.LayerNorm(args.hidden_channels)
+        # self.gru1 = nn.GRU(args.in_channels, args.hidden_channels, args.temporal_layer, batch_first=True, bidirectional=True, dropout=args.dropout)
+        # self.layer_norm1 = nn.LayerNorm(args.hidden_channels)
+        
+        self._reset_parameters()
 
+    def _reset_parameters(self):
+        for p in self.parameters():
+            if p.dim() > 1:
+                nn.init.xavier_uniform_(p)
+            else:
+                nn.init.uniform_(p)
 
     def forward(self, node_features, dynamic_edge_list):
         """
@@ -80,7 +88,7 @@ class DTHGNN(nn.Module):
         # node_features = node_features.reshape(batch_size * num_node, timestep, 2, -1)
         # node_features = self.layer_norm1(node_features)
         # node_features = node_features[:, :, 0, :] # insterested in the backward direction
-        # # Reshape back: [batch_size, num_node, timestep, out_channels]
+        # Reshape back: [batch_size, num_node, timestep, out_channels]
         # node_features = node_features.reshape(batch_size, num_node, timestep, -1)
 
         node_features = node_features.permute(0, 2, 1, 3) # [batch_size, num_node, timestep, in_channels]
@@ -112,10 +120,9 @@ class DTHGNN(nn.Module):
         # print(f"merged shape: {x.shape}")
         indiv_logit = self._final_conv(x_pred.permute(0, 3, 2, 1))
         indiv_logit = indiv_logit[:, :, :, -1]
-        indiv_logit = indiv_logit.permute(0, 2, 1)
+        indiv_logit = indiv_logit.permute(0, 2, 1) # (b, #individual, output_timestep)
 
 
-        # --- Hypergraph Reconstruction Branch with Temporal Attention ---
         x_time_masked = x[: , :-1, :, :]
         emb_time_masked = edge_emb[:, :-1, :, :]
         aggregated_embedding = self.node_aggregator(x_time_masked.permute(0, 3, 2, 1)).reshape(batch_size, num_node, -1)

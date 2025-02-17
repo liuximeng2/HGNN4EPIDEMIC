@@ -1,4 +1,4 @@
-from model.static_model import THGNN, TGCN
+from model.stgcn import THGNN, TGCN
 from model.dynamic_model import DTHGNN, DTGNN, FDTHGNN
 from model.astgcn import ASTGCN
 from model.mstgcn import MSTGCN
@@ -46,17 +46,12 @@ model_dict = {
         'class': DTHGNN,
         'default_args': {
             'seed': seed,
-            'lr': 0.0005,
             'batch_size': batch_size,
             'in_channels': 3,
-            'out_channels': 256,
-            'hidden_channels': 256,
             'temporal_layer': 2,
             'spatial_layer': 1,            
-            'weight_decay': 1e-4,
             'dropout': 0.5,
-            'time_strides': 1,
-            'nb_time_filter': 3
+            'time_strides': 1
         }
     },
     'DTGNN': {
@@ -98,9 +93,7 @@ model_dict = {
         'class': MSTGCN,
         'default_args': {
             'seed': seed,
-            'lr': 0.0005,
             'batch_size': batch_size,      
-            'weight_decay': 1e-4,
             'dropout': 0.5,
             'nb_block': 2,
             'in_channels': 3,
