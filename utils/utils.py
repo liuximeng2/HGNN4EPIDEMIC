@@ -121,11 +121,12 @@ def load_data(args, interested_interval):
         data.patient_zero = torch.unsqueeze(data.patient_zero, 1).to(dtype=torch.int64)
         data.dynamic_hypergraph = data.dynamic_hypergraph.float()
         horizon = data.sim_states.shape[1]
-        pre_symptom = data.sim_states[:, interested_interval:interested_interval + args.num_for_predict, :, 1]
+        # pre_symptom = data.sim_states[:, interested_interval:interested_interval + args.num_for_predict, :, 1]
         symptom = data.sim_states[:, interested_interval:interested_interval + args.num_for_predict, :, 2]
         critical = data.sim_states[:, interested_interval:interested_interval + args.num_for_predict, :, 3]
         #combine the three states into one using OR operation
-        data.forecast_label = torch.logical_or(torch.logical_or(pre_symptom, symptom), critical) #[num_sampel, num_individual, timestep]
+        data.forecast_label = torch.logical_or(symptom, critical) #[num_sampel, num_individual, timestep]
+        # data.forecast_label = torch.logical_or(torch.logical_or(pre_symptom, symptom), critical) #[num_sampel, num_individual, timestep]
         #print(f"forecast label shape: {data.forecast_label.shape}")
         #for all rows of num_individual, only save the first entry with 1 and set the rest to 0. FOR EXAMPLE, [[0, 1, 1, 1, 0], [1, 0, 0, 0, 0]] -> [[0, 1, 0, 0, 0], [1, 0, 0, 0, 0]]
         # data.forecast_label = retain_first_one(data.forecast_label)
@@ -186,3 +187,23 @@ def retain_first_one(binary_tensor):
                 transformed_tensor[sample_idx, individual_idx, first_one_idx] = 1  # Retain only the first 1
     transformed_tensor =torch.tensor(transformed_tensor).permute(0, 2, 1)
     return transformed_tensor[:, 1:, :]
+
+def retain_first_one_2d(binary_tensor):
+    """
+    For each row in the binary tensor, retain only the first occurrence of 1 in the last dimension,
+    setting all subsequent ones to 0.
+    
+    Parameters:
+    binary_tensor (numpy.ndarray): A 2D binary tensor of shape [timestep, num_individual].
+
+    Returns:
+    numpy.ndarray: The transformed tensor with only the first occurrence of 1 retained per row.
+    """
+    transformed_tensor = np.zeros_like(binary_tensor)  # Initialize tensor with zeros
+
+    # Iterate over samples and individuals
+    for individual_idx in range(binary_tensor.shape[1]):
+        first_one_idx = np.argmax(binary_tensor[:, individual_idx])  # Find first occurrence of 1
+        if binary_tensor[first_one_idx, individual_idx] == 1:
+            transformed_tensor[first_one_idx, individual_idx] = 1  # Retain only the first 1
+    return transformed_tensor
