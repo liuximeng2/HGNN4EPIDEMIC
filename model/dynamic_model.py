@@ -138,7 +138,7 @@ class DTHGNN(nn.Module):
         pos_recon_logit = self.score_decoder(pos_scores)
         # print(f"pos_scores: {pos_scores.shape}")
 
-        num_pos = pos_node_indice.size(0)
+        num_pos = pos_node_indice.size(0) * 2 if pos_node_indice.size(0) * 2 < 10000 else pos_node_indice.size(0)
         neg_node_indices = torch.randint(0, aggregated_embedding.size(0), (num_pos,))
         neg_hyperedge_indices = torch.randint(0, edge_aggregated_embedding.size(0), (num_pos,))
         
@@ -149,7 +149,36 @@ class DTHGNN(nn.Module):
         neg_scores = (neg_node_emb * neg_hyperedge_emb)
         neg_recon_logit = self.score_decoder(neg_scores)
 
-        return indiv_logit, pos_recon_logit, neg_recon_logit
+        # if evalution, return the logits
+        if not self.training:
+            # Ensure embeddings are on CPU before computation
+            aggregated_embedding = aggregated_embedding.to("cpu")
+            edge_aggregated_embedding = edge_aggregated_embedding.to("cpu")
+
+            # Ensure the model's decoder is also on CPU
+            self.score_decoder.to("cpu")
+
+            # Expand node and hyperedge embeddings
+            expanded_node_embeddings = aggregated_embedding.permute(1, 0, 2)  # Shape: (num_nodes, 1, hidden_dim)
+            expanded_hyperedge_embeddings = edge_aggregated_embedding.permute(0, 1, 2)  # Shape: (1, num_hyperedges, hidden_dim)
+
+            # Print shapes for debugging
+            print(f"expanded_node_embeddings: {expanded_node_embeddings.shape}")
+            print(f"expanded_hyperedge_embeddings: {expanded_hyperedge_embeddings.shape}")
+
+            # Compute element-wise product (pairwise scores)
+            full_scores = expanded_node_embeddings * expanded_hyperedge_embeddings
+
+            # Print shape for debugging
+            print(f"full_scores: {full_scores.shape}")
+
+            # Compute the reconstructed graph using the decoder
+            recon_graph = self.score_decoder(full_scores.to("cpu")).squeeze().permute(1, 0)
+            print(f"recon_graph: {recon_graph.shape}")
+
+            return indiv_logit, recon_graph, pos_recon_logit, neg_recon_logit
+
+        return indiv_logit, _, pos_recon_logit, neg_recon_logit
 
     
 class DTGNN(nn.Module):
